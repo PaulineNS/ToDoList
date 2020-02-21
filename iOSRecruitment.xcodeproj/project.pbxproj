@@ -15,7 +15,6 @@
 		5601CF4D23FFB4900044BE55 /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */; };
 		5601CF5323FFBC180044BE55 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5223FFBC180044BE55 /* ListViewController.swift */; };
 		5601CF5523FFBC4A0044BE55 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5423FFBC4A0044BE55 /* AllListsViewController.swift */; };
-		5601CF5723FFBC5F0044BE55 /* AllTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5623FFBC5F0044BE55 /* AllTasksViewController.swift */; };
 		5601CF5923FFBC6C0044BE55 /* TaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5823FFBC6C0044BE55 /* TaskViewController.swift */; };
 		5601CF5B23FFBC7E0044BE55 /* ImportantTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5A23FFBC7E0044BE55 /* ImportantTasksViewController.swift */; };
 		5601CF5D23FFC2230044BE55 /* DataBaseStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */; };
@@ -26,6 +25,8 @@
 		56D97F9623FFD78800409827 /* AllListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */; };
 		56D97F9923FFDB9800409827 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */; };
 		56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9B23FFDC5500409827 /* String+Blank.swift */; };
+		56D97F9F23FFF60C00409827 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */; };
+		56D97FA023FFF60C00409827 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +40,6 @@
 		5601CF4C23FFB4900044BE55 /* ToDoList.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ToDoList.xcdatamodel; sourceTree = "<group>"; };
 		5601CF5223FFBC180044BE55 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		5601CF5423FFBC4A0044BE55 /* AllListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
-		5601CF5623FFBC5F0044BE55 /* AllTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTasksViewController.swift; sourceTree = "<group>"; };
 		5601CF5823FFBC6C0044BE55 /* TaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewController.swift; sourceTree = "<group>"; };
 		5601CF5A23FFBC7E0044BE55 /* ImportantTasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantTasksViewController.swift; sourceTree = "<group>"; };
 		5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStack.swift; sourceTree = "<group>"; };
@@ -50,6 +50,8 @@
 		56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListsTableViewCell.xib; sourceTree = "<group>"; };
 		56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		56D97F9B23FFDC5500409827 /* String+Blank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Blank.swift"; sourceTree = "<group>"; };
+		56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
+		56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,12 +95,11 @@
 		5601CF4E23FFB49B0044BE55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5601CF6123FFCA2E0044BE55 /* WelcomeViewController.swift */,
 				5601CF5423FFBC4A0044BE55 /* AllListsViewController.swift */,
 				5601CF5223FFBC180044BE55 /* ListViewController.swift */,
-				5601CF5623FFBC5F0044BE55 /* AllTasksViewController.swift */,
 				5601CF5823FFBC6C0044BE55 /* TaskViewController.swift */,
 				5601CF5A23FFBC7E0044BE55 /* ImportantTasksViewController.swift */,
-				5601CF6123FFCA2E0044BE55 /* WelcomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -141,6 +142,8 @@
 			children = (
 				56D97F9323FFD78800409827 /* AllListsTableViewCell.swift */,
 				56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */,
+				56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */,
+				56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				56D97F9623FFD78800409827 /* AllListsTableViewCell.xib in Resources */,
 				09D0057D2293F1BF00477097 /* Assets.xcassets in Resources */,
 				09D0057B2293F1BB00477097 /* Main.storyboard in Resources */,
+				56D97FA023FFF60C00409827 /* ListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,8 +231,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				5601CF5D23FFC2230044BE55 /* DataBaseStack.swift in Sources */,
+				56D97F9F23FFF60C00409827 /* ListTableViewCell.swift in Sources */,
 				56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */,
-				5601CF5723FFBC5F0044BE55 /* AllTasksViewController.swift in Sources */,
 				5601CF5B23FFBC7E0044BE55 /* ImportantTasksViewController.swift in Sources */,
 				09D005762293F1BB00477097 /* AppDelegate.swift in Sources */,
 				5601CF5523FFBC4A0044BE55 /* AllListsViewController.swift in Sources */,

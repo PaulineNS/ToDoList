@@ -13,6 +13,7 @@ struct Constants {
     
     struct Segue {
         static let welcomeSegue = "WelcomeToApp"
+        static let allToListSegue = "AllToList"
 
     }
 }

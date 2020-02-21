@@ -22,6 +22,12 @@ final class DataBaseManager {
         return lists
     }
     
+    var tasks: [TaskList] {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
+        return tasks
+    }
+    
     // MARK: - Initializer
     
     init(dataBaseStack: DataBaseStack) {
@@ -34,6 +40,12 @@ final class DataBaseManager {
     func createList(name: String) {
         let list = List(context: managedObjectContext)
         list.name = name
+        dataBaseStack.saveContext()
+    }
+    
+    func createTask(name: String) {
+        let task = TaskList(context: managedObjectContext)
+        task.name = name
         dataBaseStack.saveContext()
     }
 

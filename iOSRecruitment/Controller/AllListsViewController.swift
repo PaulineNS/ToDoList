@@ -10,10 +10,11 @@ import UIKit
 
 class AllListsViewController: UIViewController {
 
-    @IBOutlet weak var allListsTableview: UITableView!
+    @IBOutlet weak var allListsTableview: UITableView! { didSet { allListsTableview.tableFooterView = UIView() }}
     @IBOutlet weak var addListButton: UIButton!
     
     var dataBaseManager: DataBaseManager?
+    var list: List?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,17 @@ class AllListsViewController: UIViewController {
     }
     
     @IBAction func addListButtonTapped(_ sender: UIButton) {
-        displayTaskAlert { [unowned self] listName in
+        displayAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
             self.dataBaseManager?.createList(name: listName)
             self.allListsTableview.reloadData()
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "AllToList" else {return}
+        guard let listVc = segue.destination as? ListViewController else {return}
+        listVc.navigationItem.title = list?.name        
     }
 }
 
@@ -45,6 +52,12 @@ extension AllListsViewController: UITableViewDataSource {
         }
         cell.list = dataBaseManager?.lists[indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let listSelected = dataBaseManager?.lists[indexPath.row]
+        list = listSelected
+        self.performSegue(withIdentifier: "AllToList", sender: nil)
     }
 }
 

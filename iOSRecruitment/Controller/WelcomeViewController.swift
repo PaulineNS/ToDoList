@@ -17,12 +17,6 @@ final class WelcomeViewController: UIViewController {
         animateTheTitle()
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard segue.identifier == Constants.Segue.welcomeSegue else { return }
-//        guard let tabVC = segue.destination as? UITabBarController else { return }
-//        tabVC.modalPresentationStyle = .fullScreen
-//    }
-    
     // MARK: - Methods
     
     private func animateTheTitle() {

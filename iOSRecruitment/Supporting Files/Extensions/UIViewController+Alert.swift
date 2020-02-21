@@ -13,10 +13,10 @@ extension UIViewController {
     /**
      * Display an alert to enter the list and task name
      */
-    func displayTaskAlert(handlerTaskName: @escaping (String?) -> Void) {
-        let alertController = UIAlertController(title: "Nouvelle liste", message: "Veuillez donner un nom à votre liste", preferredStyle: .alert)
+    func displayAlert(title: String, message: String, placeholder: String ,handlerTaskName: @escaping (String?) -> Void) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addTextField { textField in
-            textField.placeholder = "Liste"
+            textField.placeholder = placeholder
         }
         let addAction = UIAlertAction(title: "Ajouter", style: .default, handler: { _ in
             guard let textField = alertController.textFields else { return }
