@@ -13,6 +13,7 @@ class ListViewController: UIViewController {
     @IBOutlet weak var allTasksTableView: UITableView! { didSet { allTasksTableView.tableFooterView = UIView() }}
     
     var dataBaseManager: DataBaseManager?
+    var list: List?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,7 @@ class ListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskVc = segue.destination as? TaskViewController else {return}
         taskVc.didAddNewTask = self
+        taskVc.list = list
     }
     
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
@@ -41,14 +43,21 @@ class ListViewController: UIViewController {
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataBaseManager?.tasks.count ?? 0
+        guard let list = list else {return 0}
+        return dataBaseManager?.fetchTasksDependingList(list: list).count ?? 0
+        
+//        tasks.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell else {
             return UITableViewCell()
         }
-        cell.task = dataBaseManager?.tasks[indexPath.row]
+        guard let list = list else {return UITableViewCell()}
+
+        cell.task = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
+        
+//        tasks[indexPath.row]
         return cell
     }
     
@@ -70,7 +79,11 @@ extension ListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return dataBaseManager?.tasks.isEmpty ?? true ? tableView.bounds.size.height : 0
+        guard let list = list else {return 0}
+        return dataBaseManager?.fetchTasksDependingList(list: list).isEmpty ?? true ? tableView.bounds.size.height : 0
+
+        
+//        tasks.isEmpty ?? true ? tableView.bounds.size.height : 0
     }
 }
 

@@ -16,17 +16,25 @@ final class DataBaseManager {
     private let dataBaseStack: DataBaseStack
     private let managedObjectContext: NSManagedObjectContext
     
+    func fetchTasksDependingList(list: List) -> [TaskList] {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        let predicate = NSPredicate(format: "owner == %@", list)
+        request.predicate = predicate
+        guard let lists = try? managedObjectContext.fetch(request) else { return [] }
+        return lists
+    }
+    
     var lists: [List] {
         let request: NSFetchRequest<List> = List.fetchRequest()
         guard let lists = try? managedObjectContext.fetch(request) else { return [] }
         return lists
     }
     
-    var tasks: [TaskList] {
-        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
-        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
-        return tasks
-    }
+//    var tasks: [TaskList] {
+//        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+//        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
+//        return tasks
+//    }
     
     // MARK: - Initializer
     
@@ -43,14 +51,16 @@ final class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
-    func createTask(name: String) {
+    func createTask(name: String, list: List, note: String) {
         let task = TaskList(context: managedObjectContext)
         task.name = name
+        task.note = note
+        task.owner = list
         dataBaseStack.saveContext()
     }
 
-    func deleteAllTasks() {
-        lists.forEach { managedObjectContext.delete($0) }
-        dataBaseStack.saveContext()
-    }
+//    func deleteAllTasks() {
+//        lists.forEach { managedObjectContext.delete($0) }
+//        dataBaseStack.saveContext()
+//    }
 }

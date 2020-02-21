@@ -26,6 +26,11 @@ class AllListsViewController: UIViewController {
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.allListsTableview.reloadData()
+    }
+    
     @IBAction func addListButtonTapped(_ sender: UIButton) {
         displayAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
@@ -37,7 +42,8 @@ class AllListsViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "AllToList" else {return}
         guard let listVc = segue.destination as? ListViewController else {return}
-        listVc.navigationItem.title = list?.name        
+        listVc.navigationItem.title = list?.name
+        listVc.list = list
     }
 }
 
@@ -51,6 +57,8 @@ extension AllListsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         cell.list = dataBaseManager?.lists[indexPath.row]
+        guard let list = dataBaseManager?.lists[indexPath.row] else {return UITableViewCell()}
+        cell.taskNumberLabel.text = "\(dataBaseManager?.fetchTasksDependingList(list: list).count ?? 0) tâches"
         return cell
     }
     

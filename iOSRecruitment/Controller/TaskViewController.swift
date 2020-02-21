@@ -22,6 +22,7 @@ class TaskViewController: UIViewController {
     
     var dataBaseManager: DataBaseManager?
     var didAddNewTask: DidAddNewTask?
+    var list: List?
 
 
     override func viewDidLoad() {
@@ -44,9 +45,9 @@ class TaskViewController: UIViewController {
     }
     
     func createTask() {
-        guard let taskName = taskNameTextField.text, !taskName.isBlank  else { return }
+        guard let taskName = taskNameTextField.text, let ownerList = list else { return }
         print(taskName)
-        self.dataBaseManager?.createTask(name: taskName)
+        self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: "")
     }
     
     func dismissTheView() {
@@ -68,6 +69,6 @@ class TaskViewController: UIViewController {
     
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
         createTask()
-        dismissTheView()        
+        dismissTheView()
     }
 }

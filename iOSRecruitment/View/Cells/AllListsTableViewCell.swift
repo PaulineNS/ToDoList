@@ -15,7 +15,7 @@ class AllListsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -27,8 +27,6 @@ class AllListsTableViewCell: UITableViewCell {
     var list: List? {
         didSet {
             listNameLabel.text = list?.name
-            taskNumberLabel.text = "0 taches"
         }
     }
-    
 }

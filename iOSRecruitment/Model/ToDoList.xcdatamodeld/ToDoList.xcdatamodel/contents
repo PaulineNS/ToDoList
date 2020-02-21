@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="18F132" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="List" representedClassName=".List" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="task" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskList" inverseName="list" inverseEntity="TaskList"/>
+        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaskList" inverseName="owner" inverseEntity="TaskList"/>
     </entity>
     <entity name="TaskList" representedClassName=".TaskList" syncable="YES" codeGenerationType="class">
         <attribute name="deadline" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -10,7 +10,7 @@
         <attribute name="isImportant" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
-        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="task" inverseEntity="List"/>
+        <relationship name="owner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="List" inverseName="tasks" inverseEntity="List"/>
     </entity>
     <elements>
         <element name="List" positionX="-63" positionY="-18" width="128" height="73"/>
