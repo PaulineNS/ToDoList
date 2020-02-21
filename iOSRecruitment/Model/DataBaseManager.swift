@@ -10,29 +10,35 @@ import Foundation
 import CoreData
 
 final class DataBaseManager {
-    
 
     // MARK: - Variables
     
     private let dataBaseStack: DataBaseStack
     private let managedObjectContext: NSManagedObjectContext
     
-    var list: [List] {
+    var lists: [List] {
         let request: NSFetchRequest<List> = List.fetchRequest()
-        guard let recipes = try? managedObjectContext.fetch(request) else { return [] }
-        return recipes
+        guard let lists = try? managedObjectContext.fetch(request) else { return [] }
+        return lists
     }
-    
-//    var favoritesRecipes: [FavoritesRecipesList] {
-//        let request: NSFetchRequest<FavoritesRecipesList> = FavoritesRecipesList.fetchRequest()
-//        guard let recipes = try? managedObjectContext.fetch(request) else { return [] }
-//        return recipes
-//    }
     
     // MARK: - Initializer
     
     init(dataBaseStack: DataBaseStack) {
         self.dataBaseStack = dataBaseStack
         self.managedObjectContext = dataBaseStack.mainContext
+    }
+    
+    // MARK: - Manage List Entity
+
+    func createList(name: String) {
+        let list = List(context: managedObjectContext)
+        list.name = name
+        dataBaseStack.saveContext()
+    }
+
+    func deleteAllTasks() {
+        lists.forEach { managedObjectContext.delete($0) }
+        dataBaseStack.saveContext()
     }
 }

@@ -12,7 +12,7 @@
 		09D0057D2293F1BF00477097 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09D0057C2293F1BF00477097 /* Assets.xcassets */; };
 		09D005802293F1BF00477097 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09D0057E2293F1BF00477097 /* LaunchScreen.storyboard */; };
 		09D005892293F1F900477097 /* TaskService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D005882293F1F900477097 /* TaskService.swift */; };
-		5601CF4D23FFB4900044BE55 /* iOSRecruitment.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF4B23FFB4900044BE55 /* iOSRecruitment.xcdatamodeld */; };
+		5601CF4D23FFB4900044BE55 /* ToDoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */; };
 		5601CF5323FFBC180044BE55 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5223FFBC180044BE55 /* ListViewController.swift */; };
 		5601CF5523FFBC4A0044BE55 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5423FFBC4A0044BE55 /* AllListsViewController.swift */; };
 		5601CF5723FFBC5F0044BE55 /* AllTasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5623FFBC5F0044BE55 /* AllTasksViewController.swift */; };
@@ -21,6 +21,11 @@
 		5601CF5D23FFC2230044BE55 /* DataBaseStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */; };
 		5601CF5F23FFC25C0044BE55 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF5E23FFC25C0044BE55 /* DataBaseManager.swift */; };
 		5601CF6223FFCA2E0044BE55 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5601CF6123FFCA2E0044BE55 /* WelcomeViewController.swift */; };
+		56D97F9123FFCD4900409827 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9023FFCD4900409827 /* Constants.swift */; };
+		56D97F9523FFD78800409827 /* AllListsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9323FFD78800409827 /* AllListsTableViewCell.swift */; };
+		56D97F9623FFD78800409827 /* AllListsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */; };
+		56D97F9923FFDB9800409827 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */; };
+		56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9B23FFDC5500409827 /* String+Blank.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseStack.swift; sourceTree = "<group>"; };
 		5601CF5E23FFC25C0044BE55 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		5601CF6123FFCA2E0044BE55 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		56D97F9023FFCD4900409827 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		56D97F9323FFD78800409827 /* AllListsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsTableViewCell.swift; sourceTree = "<group>"; };
+		56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllListsTableViewCell.xib; sourceTree = "<group>"; };
+		56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		56D97F9B23FFDC5500409827 /* String+Blank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Blank.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +93,8 @@
 		5601CF4E23FFB49B0044BE55 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5601CF5223FFBC180044BE55 /* ListViewController.swift */,
 				5601CF5423FFBC4A0044BE55 /* AllListsViewController.swift */,
+				5601CF5223FFBC180044BE55 /* ListViewController.swift */,
 				5601CF5623FFBC5F0044BE55 /* AllTasksViewController.swift */,
 				5601CF5823FFBC6C0044BE55 /* TaskViewController.swift */,
 				5601CF5A23FFBC7E0044BE55 /* ImportantTasksViewController.swift */,
@@ -96,6 +106,7 @@
 		5601CF4F23FFB49D0044BE55 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				56D97F9223FFD76000409827 /* Cells */,
 				09D005792293F1BB00477097 /* Main.storyboard */,
 			);
 			path = View;
@@ -104,7 +115,7 @@
 		5601CF5023FFB49E0044BE55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5601CF4B23FFB4900044BE55 /* iOSRecruitment.xcdatamodeld */,
+				5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */,
 				09D005882293F1F900477097 /* TaskService.swift */,
 				5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */,
 				5601CF5E23FFC25C0044BE55 /* DataBaseManager.swift */,
@@ -115,12 +126,32 @@
 		5601CF5123FFB4AC0044BE55 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				56D97F9723FFDB8400409827 /* Extensions */,
 				09D005752293F1BB00477097 /* AppDelegate.swift */,
 				09D0057C2293F1BF00477097 /* Assets.xcassets */,
 				09D0057E2293F1BF00477097 /* LaunchScreen.storyboard */,
 				09D005812293F1BF00477097 /* Info.plist */,
+				56D97F9023FFCD4900409827 /* Constants.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		56D97F9223FFD76000409827 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				56D97F9323FFD78800409827 /* AllListsTableViewCell.swift */,
+				56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		56D97F9723FFDB8400409827 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */,
+				56D97F9B23FFDC5500409827 /* String+Blank.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09D005802293F1BF00477097 /* LaunchScreen.storyboard in Resources */,
+				56D97F9623FFD78800409827 /* AllListsTableViewCell.xib in Resources */,
 				09D0057D2293F1BF00477097 /* Assets.xcassets in Resources */,
 				09D0057B2293F1BB00477097 /* Main.storyboard in Resources */,
 			);
@@ -195,16 +227,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				5601CF5D23FFC2230044BE55 /* DataBaseStack.swift in Sources */,
+				56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */,
 				5601CF5723FFBC5F0044BE55 /* AllTasksViewController.swift in Sources */,
 				5601CF5B23FFBC7E0044BE55 /* ImportantTasksViewController.swift in Sources */,
 				09D005762293F1BB00477097 /* AppDelegate.swift in Sources */,
 				5601CF5523FFBC4A0044BE55 /* AllListsViewController.swift in Sources */,
+				56D97F9523FFD78800409827 /* AllListsTableViewCell.swift in Sources */,
 				09D005892293F1F900477097 /* TaskService.swift in Sources */,
 				5601CF5923FFBC6C0044BE55 /* TaskViewController.swift in Sources */,
 				5601CF5323FFBC180044BE55 /* ListViewController.swift in Sources */,
 				5601CF6223FFCA2E0044BE55 /* WelcomeViewController.swift in Sources */,
-				5601CF4D23FFB4900044BE55 /* iOSRecruitment.xcdatamodeld in Sources */,
+				5601CF4D23FFB4900044BE55 /* ToDoList.xcdatamodeld in Sources */,
 				5601CF5F23FFC25C0044BE55 /* DataBaseManager.swift in Sources */,
+				56D97F9123FFCD4900409827 /* Constants.swift in Sources */,
+				56D97F9923FFDB9800409827 /* UIViewController+Alert.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cheerz.iOSRecruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -378,7 +414,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.cheerz.iOSRecruitment;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -406,13 +442,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		5601CF4B23FFB4900044BE55 /* iOSRecruitment.xcdatamodeld */ = {
+		5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				5601CF4C23FFB4900044BE55 /* ToDoList.xcdatamodel */,
 			);
 			currentVersion = 5601CF4C23FFB4900044BE55 /* ToDoList.xcdatamodel */;
-			path = iOSRecruitment.xcdatamodeld;
+			path = ToDoList.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

@@ -10,21 +10,55 @@ import UIKit
 
 class AllListsViewController: UIViewController {
 
+    @IBOutlet weak var allListsTableview: UITableView!
+    @IBOutlet weak var addListButton: UIButton!
+    
+    var dataBaseManager: DataBaseManager?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nibName = UINib(nibName: "AllListsTableViewCell", bundle: nil)
+        allListsTableview.register(nibName, forCellReuseIdentifier: "allListsCell")
 
-        // Do any additional setup after loading the view.
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let coreDataStack = appDelegate.dataBaseStack
+        dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addListButtonTapped(_ sender: UIButton) {
+        displayTaskAlert { [unowned self] listName in
+            guard let listName = listName, !listName.isBlank else { return }
+            self.dataBaseManager?.createList(name: listName)
+            self.allListsTableview.reloadData()
+        }
     }
-    */
+}
 
+extension AllListsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return dataBaseManager?.lists.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "allListsCell", for: indexPath) as? AllListsTableViewCell else {
+            return UITableViewCell()
+        }
+        cell.list = dataBaseManager?.lists[indexPath.row]
+        return cell
+    }
+}
+
+extension AllListsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Vous n'avez pas encore de listes"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .darkGray
+        return label
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return dataBaseManager?.lists.isEmpty ?? true ? tableView.bounds.size.height : 0
+    }
 }

@@ -8,23 +8,35 @@
 
 import UIKit
 
-class WelcomeViewController: UIViewController {
-
+final class WelcomeViewController: UIViewController {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        animateTheTitle()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        guard segue.identifier == Constants.Segue.welcomeSegue else { return }
+//        guard let tabVC = segue.destination as? UITabBarController else { return }
+//        tabVC.modalPresentationStyle = .fullScreen
+//    }
+    
+    // MARK: - Methods
+    
+    private func animateTheTitle() {
+        titleLabel.text = ""
+        var charIndex = 0.0
+        let titleText = Constants.appName
+        for letter in titleText {
+            Timer.scheduledTimer(withTimeInterval: 0.2 * charIndex, repeats: false) { (timer) in
+                self.titleLabel.text?.append(letter)
+                if self.titleLabel.text == Constants.appName {
+                    self.performSegue(withIdentifier: Constants.Segue.welcomeSegue, sender: self)
+                }
+            }
+            charIndex += 1
+        }
     }
-    */
-
 }
