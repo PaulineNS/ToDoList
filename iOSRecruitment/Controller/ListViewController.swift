@@ -24,16 +24,20 @@ class ListViewController: UIViewController {
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let taskVc = segue.destination as? TaskViewController else {return}
+        taskVc.didAddNewTask = self
+    }
+    
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
         performSegue(withIdentifier: "ListToTask", sender: self)
-//        displayTaskAlert(title: "Nouvelle tâche", message: "", placeholder: "Tâche") { [unowned self] taskName in
+//        displayAlert(title: "Nouvelle tâche", message: "", placeholder: "Tâche") { [unowned self] taskName in
 //            guard let taskName = taskName, !taskName.isBlank else { return }
 //            self.dataBaseManager?.createTask(name: taskName)
 //            self.allTasksTableView.reloadData()
-//        }
+        }
     }
     
-}
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -69,4 +73,12 @@ extension ListViewController: UITableViewDelegate {
         return dataBaseManager?.tasks.isEmpty ?? true ? tableView.bounds.size.height : 0
     }
 }
+
+extension ListViewController: DidAddNewTask {
+    func addTapped() {
+        allTasksTableView.reloadData()
+    }
+}
+
+
 

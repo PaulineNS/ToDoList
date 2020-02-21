@@ -163,23 +163,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntv-tf-x3Y">
-                                <rect key="frame" x="40" y="150" width="334" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="6rL-7K-Ygu">
-                                <rect key="frame" x="40" y="190.5" width="334" height="200"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="lVF-qE-lrB"/>
-                                </constraints>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
                                 <rect key="frame" x="369" y="763" width="25" height="25"/>
                                 <state key="normal" image="trash"/>
@@ -188,7 +171,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sS-e0-Xj5">
-                                <rect key="frame" x="20" y="20" width="30" height="30"/>
+                                <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="d3j-gL-V2c"/>
+                                    <constraint firstAttribute="width" constant="40" id="k78-Lz-VNL"/>
+                                </constraints>
                                 <state key="normal" title="&lt;">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -197,9 +184,9 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="uuo-JU-EUc">
-                                <rect key="frame" x="40" y="410.5" width="334" height="34"/>
+                                <rect key="frame" x="40" y="214" width="334" height="34"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calendar" translatesAutoresizingMaskIntoConstraints="NO" id="RS9-cL-Ju3">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taskCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="RS9-cL-Ju3">
                                         <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="QgP-wD-ihd"/>
@@ -214,7 +201,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aO-Us-rrn">
-                                <rect key="frame" x="279" y="20" width="115" height="30"/>
+                                <rect key="frame" x="279" y="20" width="115" height="40"/>
                                 <state key="normal" title="Modifier la tâche">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -222,31 +209,74 @@
                                     <action selector="updateTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="n3C-NP-zsc"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tâche" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoT-Yh-Q8b">
+                                <rect key="frame" x="40" y="160" width="334" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="T7p-0K-wTf">
+                                <rect key="frame" x="40" y="268" width="334" height="200"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="taskPen" translatesAutoresizingMaskIntoConstraints="NO" id="QCg-qC-Atd">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="34" id="ExJ-Yk-7Bb"/>
+                                            <constraint firstAttribute="height" constant="34" id="V3b-pQ-vOe"/>
+                                        </constraints>
+                                    </imageView>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Ajouter une note " translatesAutoresizingMaskIntoConstraints="NO" id="6rL-7K-Ygu">
+                                        <rect key="frame" x="54" y="0.0" width="280" height="200"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="lVF-qE-lrB"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z7t-4E-n2j">
+                                <rect key="frame" x="344" y="20" width="50" height="40"/>
+                                <state key="normal" title="Ajouter">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="22m-Ra-2UH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="xoT-Yh-Q8b" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="21o-rF-0bN"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="R5P-2r-F2N" secondAttribute="trailing" constant="20" id="3TS-Z6-Ufu"/>
                             <constraint firstItem="uuo-JU-EUc" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="4Qd-8I-fRk"/>
                             <constraint firstItem="3aO-Us-rrn" firstAttribute="top" secondItem="dcH-xN-bj0" secondAttribute="top" constant="20" id="5Dj-z0-b1R"/>
-                            <constraint firstItem="ntv-tf-x3Y" firstAttribute="top" secondItem="9sS-e0-Xj5" secondAttribute="bottom" constant="100" id="NSv-ff-f5H"/>
-                            <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="ntv-tf-x3Y" secondAttribute="trailing" constant="40" id="V4n-67-REK"/>
-                            <constraint firstItem="6rL-7K-Ygu" firstAttribute="top" secondItem="ntv-tf-x3Y" secondAttribute="bottom" constant="20" id="XWY-Hn-efm"/>
+                            <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="z7t-4E-n2j" secondAttribute="trailing" constant="20" id="9f0-gP-O3s"/>
+                            <constraint firstItem="T7p-0K-wTf" firstAttribute="top" secondItem="uuo-JU-EUc" secondAttribute="bottom" constant="20" id="DXk-2n-Lyc"/>
+                            <constraint firstItem="z7t-4E-n2j" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9sS-e0-Xj5" secondAttribute="trailing" constant="8" symbolic="YES" id="GH5-Uy-BIH"/>
+                            <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="xoT-Yh-Q8b" secondAttribute="trailing" constant="40" id="HCm-tZ-7vR"/>
+                            <constraint firstAttribute="trailing" secondItem="T7p-0K-wTf" secondAttribute="trailing" constant="40" id="LPW-QU-IhO"/>
+                            <constraint firstItem="T7p-0K-wTf" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="Mgl-eF-BR3"/>
+                            <constraint firstItem="uuo-JU-EUc" firstAttribute="top" secondItem="xoT-Yh-Q8b" secondAttribute="bottom" constant="20" id="OXx-xP-cYX"/>
+                            <constraint firstItem="xoT-Yh-Q8b" firstAttribute="top" secondItem="z7t-4E-n2j" secondAttribute="bottom" constant="100" id="Qv7-3Y-krS"/>
+                            <constraint firstItem="xoT-Yh-Q8b" firstAttribute="top" secondItem="9sS-e0-Xj5" secondAttribute="bottom" constant="100" id="YcW-Dp-hEB"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="uuo-JU-EUc" secondAttribute="trailing" constant="40" id="arU-vB-MRg"/>
+                            <constraint firstItem="z7t-4E-n2j" firstAttribute="top" secondItem="dcH-xN-bj0" secondAttribute="top" constant="20" id="dcx-xC-dtr"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="3aO-Us-rrn" secondAttribute="trailing" constant="20" id="eXL-k2-l8I"/>
-                            <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="6rL-7K-Ygu" secondAttribute="trailing" constant="40" id="ebb-f3-UFa"/>
-                            <constraint firstItem="uuo-JU-EUc" firstAttribute="top" secondItem="6rL-7K-Ygu" secondAttribute="bottom" constant="20" id="kYp-rI-JOG"/>
+                            <constraint firstItem="xoT-Yh-Q8b" firstAttribute="top" secondItem="3aO-Us-rrn" secondAttribute="bottom" constant="100" id="mEk-2S-J6n"/>
+                            <constraint firstItem="3aO-Us-rrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9sS-e0-Xj5" secondAttribute="trailing" constant="8" symbolic="YES" id="oHe-sr-tzd"/>
                             <constraint firstItem="9sS-e0-Xj5" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="20" id="oYt-7V-JWh"/>
-                            <constraint firstItem="ntv-tf-x3Y" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="riT-2B-Zn4"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="bottom" secondItem="R5P-2r-F2N" secondAttribute="bottom" constant="20" id="sMb-Bu-TnU"/>
-                            <constraint firstItem="6rL-7K-Ygu" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="vuO-1b-jSY"/>
                             <constraint firstItem="9sS-e0-Xj5" firstAttribute="top" secondItem="dcH-xN-bj0" secondAttribute="top" constant="20" id="xLq-qE-U9f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dcH-xN-bj0"/>
                     </view>
                     <navigationItem key="navigationItem" title="TaskTitle" id="OFs-iv-2zF"/>
                     <connections>
+                        <outlet property="addTaskButton" destination="z7t-4E-n2j" id="g9Y-y1-DfM"/>
                         <outlet property="taskDeadlineTextField" destination="Ibb-d4-n8m" id="uyl-tu-lSB"/>
-                        <outlet property="taskNameLabel" destination="ntv-tf-x3Y" id="ikb-VN-qE8"/>
+                        <outlet property="taskNameTextField" destination="xoT-Yh-Q8b" id="uEb-FA-z4W"/>
                         <outlet property="taskNoteTextView" destination="6rL-7K-Ygu" id="BEJ-ac-uko"/>
                         <outlet property="updateTaskButton" destination="3aO-Us-rrn" id="cdy-Sc-1uO"/>
                     </connections>
@@ -292,8 +322,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="calendar" width="512" height="512"/>
         <image name="list" width="25" height="25"/>
+        <image name="taskCalendar" width="512" height="512"/>
+        <image name="taskPen" width="512" height="512"/>
         <image name="trash" width="25" height="25"/>
     </resources>
 </document>
