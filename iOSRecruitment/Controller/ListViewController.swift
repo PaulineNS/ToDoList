@@ -38,6 +38,8 @@ class ListViewController: UIViewController {
 //            self.dataBaseManager?.createTask(name: taskName)
 //            self.allTasksTableView.reloadData()
         }
+
+    
     }
     
 
@@ -55,8 +57,20 @@ extension ListViewController: UITableViewDataSource {
         }
         guard let list = list else {return UITableViewCell()}
 
+        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
+            cell.doneTaskButton.isSelected = true
+        } else {
+            cell.doneTaskButton.isSelected = false
+        }
+        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isImportant == true {
+            cell.importantTaskButton.isSelected = true
+        } else {
+            cell.importantTaskButton.isSelected = false
+        }
         cell.task = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
         
+        cell.delegate = self
+
 //        tasks[indexPath.row]
         return cell
     }
@@ -91,6 +105,21 @@ extension ListViewController: DidAddNewTask {
     func addTapped() {
         allTasksTableView.reloadData()
     }
+}
+
+extension ListViewController: ListTableViewCellDelegate {
+    func doneTaskTapped(taskName: String, done: Bool) {
+        guard let list = list else { return }
+        dataBaseManager?.updateDoneTask(taskName: taskName, list: list, doneStatus: done, forKey: "isDone")
+    }
+    
+    func importantTaskTapped(taskName: String, important: Bool) {
+        guard let list = list else { return }
+               dataBaseManager?.updateDoneTask(taskName: taskName, list: list, doneStatus: important, forKey: "isImportant")
+    }
+
+    
+    
 }
 
 

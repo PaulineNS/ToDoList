@@ -58,6 +58,20 @@ final class DataBaseManager {
         task.owner = list
         dataBaseStack.saveContext()
     }
+    
+    func updateDoneTask(taskName: String, list: List, doneStatus: Bool, forKey: String) {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        let predicateOwner = NSPredicate(format: "owner == %@", list)
+        let predicateTaskName = NSPredicate(format: "name == %@", taskName)
+        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateOwner, predicateTaskName])
+        request.predicate = andPredicate
+        guard let tasks = try? managedObjectContext.fetch(request) else { return }
+        if tasks.count != 0 {
+            let managedObject = tasks[0]
+            managedObject.setValue(doneStatus, forKey: forKey)
+            dataBaseStack.saveContext()
+        }
+    }
 
 //    func deleteAllTasks() {
 //        lists.forEach { managedObjectContext.delete($0) }
