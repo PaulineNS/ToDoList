@@ -44,6 +44,7 @@ class ListTableViewCell: UITableViewCell {
             isTaskDone = false
         } else {
             sender.isSelected = true
+            taskNameLabel.attributedText = crossTheTask(taskName: taskNameLabel.text ?? "")
             isTaskDone = true
         }
         guard let taskName = taskNameLabel.text, let taskStatus = isTaskDone else {return}
@@ -61,6 +62,12 @@ class ListTableViewCell: UITableViewCell {
         }
         guard let taskName = taskNameLabel.text, let taskStatus = isTaskImportant else {return}
         delegate?.importantTaskTapped(taskName: taskName, important: taskStatus)
+    }
+    
+    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        return attributeString
     }
     
 }

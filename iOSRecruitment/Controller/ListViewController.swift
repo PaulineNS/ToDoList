@@ -14,6 +14,8 @@ class ListViewController: UIViewController {
     
     var dataBaseManager: DataBaseManager?
     var list: List?
+    var task: TaskList?
+    var isSegueFromTableView: Bool?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +31,21 @@ class ListViewController: UIViewController {
         guard let taskVc = segue.destination as? TaskViewController else {return}
         taskVc.didAddNewTask = self
         taskVc.list = list
+        if isSegueFromTableView == true {
+            taskVc.task = task
+        }
     }
     
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
+        isSegueFromTableView = false
         performSegue(withIdentifier: "ListToTask", sender: self)
-//        displayAlert(title: "Nouvelle tâche", message: "", placeholder: "Tâche") { [unowned self] taskName in
-//            guard let taskName = taskName, !taskName.isBlank else { return }
-//            self.dataBaseManager?.createTask(name: taskName)
-//            self.allTasksTableView.reloadData()
         }
-
     
+    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        return attributeString
+    }
     }
     
 
@@ -47,8 +53,6 @@ extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).count ?? 0
-        
-//        tasks.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,6 +63,7 @@ extension ListViewController: UITableViewDataSource {
 
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
             cell.doneTaskButton.isSelected = true
+            cell.taskNameLabel.attributedText = crossTheTask(taskName: cell.taskNameLabel.text ?? "")
         } else {
             cell.doneTaskButton.isSelected = false
         }
@@ -71,15 +76,16 @@ extension ListViewController: UITableViewDataSource {
         
         cell.delegate = self
 
-//        tasks[indexPath.row]
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let listSelected = dataBaseManager?.lists[indexPath.row]
-//        list = listSelected
-//        self.performSegue(withIdentifier: "AllToList", sender: nil)
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let list = list else {return }
+        let taskSelected = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
+        task = taskSelected
+        isSegueFromTableView = true
+        self.performSegue(withIdentifier: "ListToTask", sender: nil)
+    }
 }
 
 extension ListViewController: UITableViewDelegate {
@@ -95,9 +101,6 @@ extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).isEmpty ?? true ? tableView.bounds.size.height : 0
-
-        
-//        tasks.isEmpty ?? true ? tableView.bounds.size.height : 0
     }
 }
 
