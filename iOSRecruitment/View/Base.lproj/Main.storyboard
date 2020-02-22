@@ -17,15 +17,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nQB-iD-yUo">
-                                <rect key="frame" x="186" y="437.5" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <rect key="frame" x="172.5" y="433" width="69" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
+                                <color key="textColor" red="0.13488328456878662" green="0.12285368889570236" blue="0.12579718232154846" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkLogo" translatesAutoresizingMaskIntoConstraints="NO" id="3Mh-Fp-ve2">
+                                <rect key="frame" x="107" y="144" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="8EL-OM-lww"/>
+                                    <constraint firstAttribute="height" constant="200" id="aWY-OJ-o4a"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.4271816611289978" green="0.7634848952293396" blue="0.84078711271286011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="3Mh-Fp-ve2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Pa-hZ-URZ"/>
                             <constraint firstItem="nQB-iD-yUo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="HUM-OS-JZw"/>
+                            <constraint firstItem="3Mh-Fp-ve2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="gA4-Ca-3zV"/>
                             <constraint firstItem="nQB-iD-yUo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zVk-dI-dMz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -48,7 +57,15 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hdJ-HA-t1I">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.32926684620000002" green="0.33952775600000001" blue="0.37492364649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="6bu-p4-PWr" kind="relationship" relationship="rootViewController" id="bxZ-cw-gXV"/>
@@ -66,40 +83,49 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-MG-pfl">
-                                <rect key="frame" x="10" y="773" width="394" height="30"/>
-                                <state key="normal" title="+ Ajouter une liste">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-MG-pfl">
+                                <rect key="frame" x="90" y="758" width="234" height="40"/>
+                                <color key="backgroundColor" red="0.2983173131942749" green="0.72145950794219971" blue="0.79300624132156372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Ajouter une liste ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addListButtonTapped:" destination="6bu-p4-PWr" eventType="touchUpInside" id="4Sj-U9-n3x"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KHK-k1-pT9">
-                                <rect key="frame" x="0.0" y="140" width="414" height="623"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="608"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="6bu-p4-PWr" id="lVZ-qR-DfG"/>
                                     <outlet property="delegate" destination="6bu-p4-PWr" id="ezZ-0l-MWi"/>
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.32854151725769043" green="0.33613163232803345" blue="0.37490159273147583" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="TRm-mc-jAZ" firstAttribute="bottom" secondItem="zXB-MG-pfl" secondAttribute="bottom" constant="10" id="5GZ-4b-wqq"/>
+                            <constraint firstItem="zXB-MG-pfl" firstAttribute="leading" secondItem="TRm-mc-jAZ" secondAttribute="leading" constant="90" id="5rP-zP-ITg"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="leading" secondItem="TRm-mc-jAZ" secondAttribute="leading" id="C5G-7g-WmP"/>
-                            <constraint firstItem="TRm-mc-jAZ" firstAttribute="trailing" secondItem="zXB-MG-pfl" secondAttribute="trailing" constant="10" id="IFT-Bv-mW5"/>
-                            <constraint firstItem="zXB-MG-pfl" firstAttribute="leading" secondItem="TRm-mc-jAZ" secondAttribute="leading" constant="10" id="KSo-ZK-lkP"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="top" secondItem="TRm-mc-jAZ" secondAttribute="top" id="Rua-lc-BXb"/>
+                            <constraint firstItem="TRm-mc-jAZ" firstAttribute="bottom" secondItem="zXB-MG-pfl" secondAttribute="bottom" constant="15" id="cET-lB-beq"/>
+                            <constraint firstItem="zXB-MG-pfl" firstAttribute="top" secondItem="KHK-k1-pT9" secondAttribute="bottom" constant="10" id="d2w-yA-kYQ"/>
+                            <constraint firstItem="TRm-mc-jAZ" firstAttribute="trailing" secondItem="zXB-MG-pfl" secondAttribute="trailing" constant="90" id="kSB-HF-7EU"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="trailing" secondItem="TRm-mc-jAZ" secondAttribute="trailing" id="rTH-dp-GK5"/>
-                            <constraint firstItem="zXB-MG-pfl" firstAttribute="top" secondItem="KHK-k1-pT9" secondAttribute="bottom" constant="10" id="wb4-Yu-JcN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TRm-mc-jAZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Listes" image="list" id="OFh-mT-wuq"/>
                     <navigationItem key="navigationItem" title="Mes listes" id="alx-ZW-raP">
+                        <barButtonItem key="backBarButtonItem" title=" " id="7Vs-Ag-EJQ"/>
                         <barButtonItem key="rightBarButtonItem" title="Tout supprimer" id="RFW-iK-UCe">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="tintColor" red="0.9777948260307312" green="0.76686447858810425" blue="0.19770866632461548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="deleteAllListsButtonTapped:" destination="6bu-p4-PWr" id="cFc-WS-X4a"/>
                             </connections>
@@ -115,7 +141,7 @@
             </objects>
             <point key="canvasLocation" x="4573.913043478261" y="-260.49107142857144"/>
         </scene>
-        <!--ListTitle-->
+        <!--List View Controller-->
         <scene sceneID="bLa-TO-nGw">
             <objects>
                 <viewController id="RvP-mK-uGO" customClass="ListViewController" customModule="iOSRecruitment" customModuleProvider="target" sceneMemberID="viewController">
@@ -123,18 +149,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUM-kR-FjI">
-                                <rect key="frame" x="10" y="773" width="394" height="30"/>
-                                <state key="normal" title="+ Ajouter une tache ">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUM-kR-FjI">
+                                <rect key="frame" x="90" y="758" width="234" height="40"/>
+                                <color key="backgroundColor" red="0.29831731319999999" green="0.72145950790000002" blue="0.79300624129999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <state key="normal" title="Ajouter une tache ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addTaskButtonTapped:" destination="RvP-mK-uGO" eventType="touchUpInside" id="Yhu-cB-kb8"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mAd-uL-oi7">
-                                <rect key="frame" x="0.0" y="140" width="414" height="623"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <rect key="frame" x="0.0" y="140" width="414" height="608"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="RvP-mK-uGO" id="sIe-n0-bOL"/>
                                     <outlet property="delegate" destination="RvP-mK-uGO" id="QGT-Qq-B26"/>
@@ -148,21 +181,20 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" red="0.32926684617996216" green="0.33952775597572327" blue="0.37492364645004272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="YZ5-hq-ESP" firstAttribute="bottom" secondItem="hk7-7N-Zav" secondAttribute="bottom" constant="10" id="46m-d3-cdU"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="top" secondItem="YZ5-hq-ESP" secondAttribute="top" id="GSw-IJ-SQ4"/>
-                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="bottom" secondItem="YUM-kR-FjI" secondAttribute="bottom" constant="10" id="JeP-b1-iCD"/>
-                            <constraint firstItem="YUM-kR-FjI" firstAttribute="leading" secondItem="YZ5-hq-ESP" secondAttribute="leading" constant="10" id="aoe-If-dsi"/>
+                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="bottom" secondItem="YUM-kR-FjI" secondAttribute="bottom" constant="15" id="JeP-b1-iCD"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="trailing" secondItem="YZ5-hq-ESP" secondAttribute="trailing" id="evY-bb-EIY"/>
-                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="trailing" secondItem="YUM-kR-FjI" secondAttribute="trailing" constant="10" id="o48-PQ-GoD"/>
+                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="trailing" secondItem="YUM-kR-FjI" secondAttribute="trailing" constant="90" id="nqt-ca-fGG"/>
                             <constraint firstItem="YUM-kR-FjI" firstAttribute="top" secondItem="mAd-uL-oi7" secondAttribute="bottom" constant="10" id="o8n-sd-bHS"/>
                             <constraint firstItem="YZ5-hq-ESP" firstAttribute="trailing" secondItem="hk7-7N-Zav" secondAttribute="trailing" constant="10" id="pZZ-N7-hNQ"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="leading" secondItem="YZ5-hq-ESP" secondAttribute="leading" id="rMQ-E1-Mkp"/>
+                            <constraint firstItem="YUM-kR-FjI" firstAttribute="leading" secondItem="YZ5-hq-ESP" secondAttribute="leading" constant="90" id="w3U-vb-AW8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YZ5-hq-ESP"/>
                     </view>
-                    <navigationItem key="navigationItem" title="ListTitle" id="ZL0-NJ-opP"/>
                     <connections>
                         <outlet property="allTasksTableView" destination="mAd-uL-oi7" id="0SO-7N-irk"/>
                         <segue destination="BWw-52-nHq" kind="presentation" identifier="ListToTask" id="du9-ne-CzB"/>
@@ -331,6 +363,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.32287484407424927" green="0.77521461248397827" blue="0.85108602046966553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="barTintColor" red="0.32926684617996216" green="0.33952775597572327" blue="0.37492364645004272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.3228748441" green="0.77521461250000001" blue="0.85108602050000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
                         <segue destination="dvc-Px-S7S" kind="relationship" relationship="viewControllers" id="Jmm-nq-VWu"/>
@@ -360,6 +395,7 @@
     </scenes>
     <resources>
         <image name="checkBox" width="25" height="25"/>
+        <image name="checkLogo" width="699" height="545"/>
         <image name="emptyFlag" width="25" height="25"/>
         <image name="fullFlag" width="25" height="25"/>
         <image name="list" width="25" height="25"/>

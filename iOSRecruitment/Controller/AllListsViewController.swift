@@ -88,7 +88,7 @@ extension AllListsViewController: UITableViewDelegate {
         label.text = "Vous n'avez pas encore de listes"
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         label.textAlignment = .center
-        label.textColor = .darkGray
+        label.textColor = .white
         return label
     }
 
