@@ -215,18 +215,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5k-Zl-TLT">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-Nu-o0v">
                                 <rect key="frame" x="0.0" y="342" width="414" height="500"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sS-e0-Xj5">
-                                        <rect key="frame" x="10" y="10" width="60" height="40"/>
+                                        <rect key="frame" x="10" y="10" width="120" height="40"/>
                                         <color key="backgroundColor" red="0.32287484407424927" green="0.77521461248397827" blue="0.85108602046966553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="2kH-pk-qkC"/>
-                                            <constraint firstAttribute="width" constant="60" id="LPa-yN-TKY"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="LPa-yN-TKY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <state key="normal" title="←">
+                                        <state key="normal" title="← Ma liste">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -245,10 +249,10 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-x2-PWz">
-                                                        <rect key="frame" x="10" y="23" width="280" height="254"/>
+                                                        <rect key="frame" x="20" y="23" width="260" height="254"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9kt-ZZ-VhQ">
-                                                                <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Uj-IR-atf">
                                                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -263,12 +267,12 @@
                                                                         </connections>
                                                                     </button>
                                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tâche" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoT-Yh-Q8b">
-                                                                        <rect key="frame" x="45" y="6" width="190" height="34"/>
+                                                                        <rect key="frame" x="45" y="6" width="170" height="34"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="My4-BF-q3M">
-                                                                        <rect key="frame" x="240" y="0.0" width="40" height="40"/>
+                                                                        <rect key="frame" x="220" y="0.0" width="40" height="40"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="40" id="Qgx-nz-ocg"/>
                                                                             <constraint firstAttribute="height" constant="40" id="yyb-ER-5b0"/>
@@ -282,12 +286,12 @@
                                                                 </subviews>
                                                             </stackView>
                                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ajouter une échance" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-d4-n8m">
-                                                                <rect key="frame" x="0.0" y="65" width="280" height="34"/>
+                                                                <rect key="frame" x="0.0" y="65" width="260" height="34"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Ajouter une note " translatesAutoresizingMaskIntoConstraints="NO" id="6rL-7K-Ygu">
-                                                                <rect key="frame" x="0.0" y="124" width="280" height="80"/>
+                                                                <rect key="frame" x="0.0" y="124" width="260" height="80"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="80" id="rga-e7-Bsr"/>
@@ -297,7 +301,7 @@
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
-                                                                <rect key="frame" x="0.0" y="229" width="280" height="25"/>
+                                                                <rect key="frame" x="0.0" y="229" width="260" height="25"/>
                                                                 <state key="normal" image="yellowTrash"/>
                                                                 <connections>
                                                                     <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
@@ -308,8 +312,8 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="QZZ-x2-PWz" secondAttribute="trailing" constant="10" id="Suh-v5-yaB"/>
-                                                    <constraint firstItem="QZZ-x2-PWz" firstAttribute="leading" secondItem="VBd-qg-8fk" secondAttribute="leading" constant="10" id="VFh-Bc-b1Z"/>
+                                                    <constraint firstAttribute="trailing" secondItem="QZZ-x2-PWz" secondAttribute="trailing" constant="20" id="Suh-v5-yaB"/>
+                                                    <constraint firstItem="QZZ-x2-PWz" firstAttribute="leading" secondItem="VBd-qg-8fk" secondAttribute="leading" constant="20" id="VFh-Bc-b1Z"/>
                                                     <constraint firstAttribute="height" constant="300" id="iat-yc-yeR"/>
                                                     <constraint firstItem="QZZ-x2-PWz" firstAttribute="centerY" secondItem="VBd-qg-8fk" secondAttribute="centerY" id="jBL-Sv-fFG"/>
                                                     <constraint firstAttribute="width" constant="300" id="rf1-t3-WIQ"/>
@@ -341,17 +345,27 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.4802358706009095" green="0.48977874417576878" blue="0.50499029692054398" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="9sS-e0-Xj5" secondAttribute="trailing" constant="20" symbolic="YES" id="Q6D-wL-Xzq"/>
                                     <constraint firstItem="9sS-e0-Xj5" firstAttribute="top" secondItem="cbf-Nu-o0v" secondAttribute="top" constant="10" id="X6Q-qN-CFY"/>
                                     <constraint firstItem="AwY-U4-g8Z" firstAttribute="centerY" secondItem="cbf-Nu-o0v" secondAttribute="centerY" id="ZEd-Bs-Iaq"/>
                                     <constraint firstItem="9sS-e0-Xj5" firstAttribute="leading" secondItem="cbf-Nu-o0v" secondAttribute="leading" constant="10" id="ZXP-0w-4k9"/>
                                     <constraint firstAttribute="height" constant="500" id="cYx-ef-GKv"/>
                                     <constraint firstItem="AwY-U4-g8Z" firstAttribute="centerX" secondItem="cbf-Nu-o0v" secondAttribute="centerX" id="cZC-Kl-Xdp"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" id="9J7-RM-peu"/>
                             <constraint firstAttribute="bottom" secondItem="cbf-Nu-o0v" secondAttribute="bottom" id="HeA-3E-KSo"/>
+                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="top" secondItem="qwh-Cj-sbg" secondAttribute="top" id="PnU-am-d4t"/>
+                            <constraint firstAttribute="bottom" secondItem="q5k-Zl-TLT" secondAttribute="bottom" id="VRL-wZ-8Az"/>
+                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="trailing" secondItem="dcH-xN-bj0" secondAttribute="trailing" id="Xhe-xu-nVS"/>
                             <constraint firstItem="cbf-Nu-o0v" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" id="fxA-EH-Ajf"/>
                             <constraint firstItem="cbf-Nu-o0v" firstAttribute="trailing" secondItem="dcH-xN-bj0" secondAttribute="trailing" id="oBp-cd-z15"/>
                         </constraints>
