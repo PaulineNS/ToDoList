@@ -48,7 +48,7 @@
                                             <constraint firstAttribute="width" constant="60" id="wRF-cI-adX"/>
                                         </constraints>
                                         <state key="normal" image="emptyFlag"/>
-                                        <state key="selected" image="flag"/>
+                                        <state key="selected" image="fullFlag"/>
                                         <connections>
                                             <action selector="importantTaskButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BoQ-lH-878"/>
                                         </connections>
@@ -84,7 +84,7 @@
     <resources>
         <image name="checkBox" width="25" height="25"/>
         <image name="emptyFlag" width="25" height="25"/>
-        <image name="flag" width="25" height="25"/>
+        <image name="fullFlag" width="25" height="25"/>
         <image name="uncheckBox" width="25" height="25"/>
     </resources>
 </document>

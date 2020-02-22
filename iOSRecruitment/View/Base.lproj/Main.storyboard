@@ -201,8 +201,8 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aO-Us-rrn">
-                                <rect key="frame" x="279" y="20" width="115" height="40"/>
-                                <state key="normal" title="Modifier la tâche">
+                                <rect key="frame" x="337" y="20" width="57" height="40"/>
+                                <state key="normal" title="Modifier">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -262,6 +262,18 @@
                                     </textField>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="My4-BF-q3M">
+                                <rect key="frame" x="340" y="86" width="34" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="Qgx-nz-ocg"/>
+                                    <constraint firstAttribute="height" constant="34" id="yyb-ER-5b0"/>
+                                </constraints>
+                                <state key="normal" image="emptyFlag"/>
+                                <state key="selected" image="fullFlag"/>
+                                <connections>
+                                    <action selector="importantTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="odX-Pr-pbC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -276,10 +288,12 @@
                             <constraint firstItem="ODJ-LT-47S" firstAttribute="top" secondItem="9sS-e0-Xj5" secondAttribute="bottom" constant="100" id="JHf-qc-gdY"/>
                             <constraint firstAttribute="trailing" secondItem="T7p-0K-wTf" secondAttribute="trailing" constant="40" id="LPW-QU-IhO"/>
                             <constraint firstItem="T7p-0K-wTf" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="Mgl-eF-BR3"/>
+                            <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="My4-BF-q3M" secondAttribute="trailing" constant="40" id="Z1V-BT-srK"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="uuo-JU-EUc" secondAttribute="trailing" constant="40" id="arU-vB-MRg"/>
                             <constraint firstItem="z7t-4E-n2j" firstAttribute="top" secondItem="dcH-xN-bj0" secondAttribute="top" constant="20" id="dcx-xC-dtr"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="3aO-Us-rrn" secondAttribute="trailing" constant="20" id="eXL-k2-l8I"/>
                             <constraint firstItem="dcH-xN-bj0" firstAttribute="trailing" secondItem="ODJ-LT-47S" secondAttribute="trailing" constant="40" id="hhZ-NO-MTl"/>
+                            <constraint firstItem="ODJ-LT-47S" firstAttribute="top" secondItem="My4-BF-q3M" secondAttribute="bottom" constant="40" id="igZ-KY-Xl2"/>
                             <constraint firstItem="3aO-Us-rrn" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="9sS-e0-Xj5" secondAttribute="trailing" constant="8" symbolic="YES" id="oHe-sr-tzd"/>
                             <constraint firstItem="9sS-e0-Xj5" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="20" id="oYt-7V-JWh"/>
                             <constraint firstItem="ODJ-LT-47S" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" constant="40" id="reU-Db-NxK"/>
@@ -293,6 +307,7 @@
                     <connections>
                         <outlet property="addTaskButton" destination="z7t-4E-n2j" id="g9Y-y1-DfM"/>
                         <outlet property="doneTaskButton" destination="5Uj-IR-atf" id="4Ao-Q4-EJm"/>
+                        <outlet property="importantTaskButton" destination="My4-BF-q3M" id="MQh-rd-UnY"/>
                         <outlet property="taskDeadlineTextField" destination="Ibb-d4-n8m" id="uyl-tu-lSB"/>
                         <outlet property="taskNameTextField" destination="xoT-Yh-Q8b" id="uEb-FA-z4W"/>
                         <outlet property="taskNoteTextView" destination="6rL-7K-Ygu" id="BEJ-ac-uko"/>
@@ -341,6 +356,8 @@
     </scenes>
     <resources>
         <image name="checkBox" width="25" height="25"/>
+        <image name="emptyFlag" width="25" height="25"/>
+        <image name="fullFlag" width="25" height="25"/>
         <image name="list" width="25" height="25"/>
         <image name="taskCalendar" width="512" height="512"/>
         <image name="taskPen" width="512" height="512"/>

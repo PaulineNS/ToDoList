@@ -13,20 +13,21 @@ protocol DidAddNewTask {
 }
 
 class TaskViewController: UIViewController {
-
+    
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskNoteTextView: UITextView!
     @IBOutlet weak var taskDeadlineTextField: UITextField!
     @IBOutlet weak var updateTaskButton: UIButton!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var doneTaskButton: UIButton!
+    @IBOutlet weak var importantTaskButton: UIButton!
     
     var dataBaseManager: DataBaseManager?
     var didAddNewTask: DidAddNewTask?
     var list: List?
     var task: TaskList?
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateTaskButton.isHidden = true
@@ -36,6 +37,11 @@ class TaskViewController: UIViewController {
         taskNameTextField.font = font
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
         prepareTheView()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        dismissTheView()
     }
     
     func prepareTheView() {
@@ -55,11 +61,11 @@ class TaskViewController: UIViewController {
                 taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
             }
             if task?.isImportant == true {
-//                cell.importantTaskButton.isSelected = true
+                importantTaskButton.isSelected = true
                 print("true isImportant")
             } else {
                 print("false isImportant")
-//                cell.importantTaskButton.isSelected = false
+                importantTaskButton.isSelected = false
             }
             
             
@@ -74,8 +80,8 @@ class TaskViewController: UIViewController {
     }
     
     func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
-
-
+        
+        
         addTaskButton.isHidden = isUpdateElementsHidden
         updateTaskButton.isHidden = isDisplayElementsHidden
         taskNameTextField.isUserInteractionEnabled = isTxtFieldEnable
@@ -117,14 +123,24 @@ class TaskViewController: UIViewController {
     }
     @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
-                   sender.isSelected = false
+            sender.isSelected = false
             dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isDone")
             taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
-               } else {
-                   sender.isSelected = true
+        } else {
+            sender.isSelected = true
             taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
             dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isDone")
-
-               }
+            
+        }
+    }
+    
+    @IBAction func importantTaskButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isImportant")
+        } else {
+            sender.isSelected = true
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isImportant")
+        }
     }
 }
