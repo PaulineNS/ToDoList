@@ -45,12 +45,14 @@ final class DataBaseManager {
     
     // MARK: - Manage List Entity
 
+    // fait
     func createList(name: String) {
         let list = List(context: managedObjectContext)
         list.name = name
         dataBaseStack.saveContext()
     }
     
+    //fait
     func createTask(name: String, list: List, note: String) {
         let task = TaskList(context: managedObjectContext)
         task.name = name
@@ -59,6 +61,7 @@ final class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
+    //fait
     func updateTaskStatus(taskName: String, list: List, status: Bool, forKey: String) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -73,16 +76,19 @@ final class DataBaseManager {
         }
     }
     
+    //fait
     func deleteAllTasks(list: List) {
         fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
+    //fait
     func deleteAllLists() {
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
+    //fait
     func deleteASpecificList(listName: String) {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -95,6 +101,7 @@ final class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
+    //fait
     func deleteASpecificTask(taskName: String, list: List) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -109,6 +116,7 @@ final class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
+    //fait
     func checkListExistence(listName: String) -> Bool {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -119,6 +127,7 @@ final class DataBaseManager {
         return true
     }
     
+    //fait
     func checkTaskExistenceInList(taskName: String, list: List) -> Bool {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -129,15 +138,4 @@ final class DataBaseManager {
         if tasks.isEmpty {return false}
         return true
     }
-    
-    
-    
-//    func checkIfRecipeIsInFavorite(recipeName: String) -> Bool {
-//        let request: NSFetchRequest<FavoritesRecipesList> = FavoritesRecipesList.fetchRequest()
-//        request.predicate = NSPredicate(format: "name == %@", recipeName)
-//        
-//        guard let recipes = try? managedObjectContext.fetch(request) else { return false }
-//        if recipes.isEmpty {return false}
-//        return true
-//    }
 }
