@@ -53,8 +53,11 @@ final class DataBaseManager {
     }
     
     //fait
-    func createTask(name: String, list: List, note: String) {
+    func createTask(name: String, list: List, note: String, deadLine: String) {
         let task = TaskList(context: managedObjectContext)
+        task.isDone = false
+        task.isImportant = false
+        task.deadline = deadLine
         task.name = name
         task.note = note
         task.owner = list

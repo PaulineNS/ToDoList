@@ -26,8 +26,10 @@ class TaskViewController: UIViewController {
     var didAddNewTask: DidAddNewTask?
     var list: List?
     var task: TaskList?
-    
-    
+    private var datePicker: UIDatePicker?
+    private let minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
+    private var deadLinedate: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -36,6 +38,7 @@ class TaskViewController: UIViewController {
         taskNameTextField.font = font
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
         prepareTheView()
+        manageDatePicker()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,6 +53,7 @@ class TaskViewController: UIViewController {
             manageElementVisibility(isUpdateElementsHidden: true, isDisplayElementsHidden: false, isTxtFieldEnable: false, border: .none)
             taskNoteTextView.text = task?.note
             taskNameTextField.text = task?.name
+            taskDeadlineTextField.text = task?.deadline
             if task?.isDone == true {
                 doneTaskButton.isSelected = true
                 taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
@@ -73,8 +77,10 @@ class TaskViewController: UIViewController {
     }
     
     func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
-        
-        
+         
+        importantTaskButton.isHidden = isDisplayElementsHidden
+        doneTaskButton.isHidden = isDisplayElementsHidden
+        trashButton.isHidden = isDisplayElementsHidden
         addTaskButton.isHidden = isUpdateElementsHidden
         taskNameTextField.isUserInteractionEnabled = isTxtFieldEnable
         taskNoteTextView.isUserInteractionEnabled = isTxtFieldEnable
@@ -83,19 +89,36 @@ class TaskViewController: UIViewController {
         taskNameTextField.borderStyle = border
     }
     
-    var isSegueFromNew: Bool?
+    func manageDatePicker() {
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.minimumDate = minimumDate
+        datePicker?.locale = Locale.init(identifier: "fr_FR")
+        taskDeadlineTextField.inputView = datePicker
+        datePicker?.addTarget(self, action: #selector(TaskViewController.dateChanged(datePicker:)), for: .valueChanged)
+    }
+    
+    @objc private func dateChanged(datePicker: UIDatePicker) {
+        deadLinedate = convertDateToString(date: datePicker.date)
+        taskDeadlineTextField.text = deadLinedate
+    }
+
+    
+//    var isSegueFromNew: Bool?
     
     
     func createTask() -> Bool {
         guard let taskName = taskNameTextField.text, let ownerList = list, let taskNote = taskNoteTextView.text else { return false }
-        print(taskNote)
         var noteTask = taskNote.trimmingCharacters(in: .whitespaces)
+        var dateTask = deadLinedate
         if noteTask == "Ajouter une note" || noteTask == "" {
             noteTask = "Pas de note sur cette tâche"
         }
-        print(noteTask)
+        if dateTask == nil {
+            dateTask = "Pas d'échéance"
+        }
         if dataBaseManager?.checkTaskExistenceInList(taskName: taskName, list: list ?? List()) == false {
-            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask)
+            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask, deadLine: dateTask ?? "hello")
             return true
         } else {
         self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
@@ -113,8 +136,10 @@ class TaskViewController: UIViewController {
     }
     
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
-        if createTask() == true {
+        if taskNameTextField.text != "" && createTask() == true {
             dismissTheView()
+        } else {
+            displayMessageAlert(title: "Ajout impossible", message: "Veuillez ajouter un titre à votre tâche")
         }
     }
     @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
