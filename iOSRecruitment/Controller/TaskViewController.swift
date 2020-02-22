@@ -48,10 +48,11 @@ class TaskViewController: UIViewController {
             if task?.isDone == true {
                 print("true isDone")
                 doneTaskButton.isSelected = true
-                taskNameTextField.attributedText = crossTheTask(taskName: taskNameTextField.text ?? "")
+                taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
             } else {
                 print("false isDone")
                 doneTaskButton.isSelected = false
+                taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
             }
             if task?.isImportant == true {
 //                cell.importantTaskButton.isSelected = true
@@ -65,9 +66,10 @@ class TaskViewController: UIViewController {
         }
     }
     
-    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+    func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        attributeString.addAttribute(NSAttributedString.Key
+            .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
     
@@ -112,5 +114,17 @@ class TaskViewController: UIViewController {
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
         createTask()
         dismissTheView()
+    }
+    @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
+                   sender.isSelected = false
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isDone")
+            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
+               } else {
+                   sender.isSelected = true
+            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isDone")
+
+               }
     }
 }

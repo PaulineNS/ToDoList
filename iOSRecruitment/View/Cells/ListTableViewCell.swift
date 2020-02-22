@@ -42,9 +42,11 @@ class ListTableViewCell: UITableViewCell {
         if sender.isSelected {
             sender.isSelected = false
             isTaskDone = false
+            taskNameLabel.attributedText = defineCrossLineValue(taskName: taskNameLabel.text ?? "", value: 0)
         } else {
             sender.isSelected = true
-            taskNameLabel.attributedText = crossTheTask(taskName: taskNameLabel.text ?? "")
+            taskNameLabel.attributedText = defineCrossLineValue(taskName: taskNameLabel.text ?? "", value: 2)
+                
             isTaskDone = true
         }
         guard let taskName = taskNameLabel.text, let taskStatus = isTaskDone else {return}
@@ -64,9 +66,10 @@ class ListTableViewCell: UITableViewCell {
         delegate?.importantTaskTapped(taskName: taskName, important: taskStatus)
     }
     
-    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+    func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        attributeString.addAttribute(NSAttributedString.Key
+            .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
     

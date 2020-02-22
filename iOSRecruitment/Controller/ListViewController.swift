@@ -41,12 +41,19 @@ class ListViewController: UIViewController {
         performSegue(withIdentifier: "ListToTask", sender: self)
         }
     
-    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+//    func crossTheTask(taskName: String) -> NSMutableAttributedString {
+//        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
+//        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+//        return attributeString
+//    }
+    
+    func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
+        attributeString.addAttribute(NSAttributedString.Key
+            .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
-    }
+}
     
 
 extension ListViewController: UITableViewDataSource {
@@ -63,9 +70,10 @@ extension ListViewController: UITableViewDataSource {
 
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
             cell.doneTaskButton.isSelected = true
-            cell.taskNameLabel.attributedText = crossTheTask(taskName: cell.taskNameLabel.text ?? "")
+            cell.taskNameLabel.attributedText = defineCrossLineValue(taskName: cell.taskNameLabel.text ?? "", value: 2)
         } else {
             cell.doneTaskButton.isSelected = false
+            cell.taskNameLabel.attributedText = defineCrossLineValue(taskName: cell.taskNameLabel.text ?? "", value: 0)  
         }
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isImportant == true {
             cell.importantTaskButton.isSelected = true
@@ -113,12 +121,12 @@ extension ListViewController: DidAddNewTask {
 extension ListViewController: ListTableViewCellDelegate {
     func doneTaskTapped(taskName: String, done: Bool) {
         guard let list = list else { return }
-        dataBaseManager?.updateDoneTask(taskName: taskName, list: list, doneStatus: done, forKey: "isDone")
+        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: done, forKey: "isDone")
     }
     
     func importantTaskTapped(taskName: String, important: Bool) {
         guard let list = list else { return }
-               dataBaseManager?.updateDoneTask(taskName: taskName, list: list, doneStatus: important, forKey: "isImportant")
+               dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: "isImportant")
     }
 
     
