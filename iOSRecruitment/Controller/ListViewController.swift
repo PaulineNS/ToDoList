@@ -46,8 +46,6 @@ class ListViewController: UIViewController {
             guard success == true else {return}
             self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
             self.navigationController?.popViewController(animated: true)
-//            self.dataBaseManager?.deleteAllLists()
-//            self.allListsTableview.reloadData()
         }
     }
     

@@ -51,19 +51,15 @@ class TaskViewController: UIViewController {
             taskNoteTextView.text = task?.note
             taskNameTextField.text = task?.name
             if task?.isDone == true {
-                print("true isDone")
                 doneTaskButton.isSelected = true
                 taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
             } else {
-                print("false isDone")
                 doneTaskButton.isSelected = false
                 taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
             }
             if task?.isImportant == true {
                 importantTaskButton.isSelected = true
-                print("true isImportant")
             } else {
-                print("false isImportant")
                 importantTaskButton.isSelected = false
             }
         }
@@ -91,9 +87,15 @@ class TaskViewController: UIViewController {
     
     
     func createTask() -> Bool {
-        guard let taskName = taskNameTextField.text, let ownerList = list else { return false }
+        guard let taskName = taskNameTextField.text, let ownerList = list, let taskNote = taskNoteTextView.text else { return false }
+        print(taskNote)
+        var noteTask = taskNote.trimmingCharacters(in: .whitespaces)
+        if noteTask == "Ajouter une note" || noteTask == "" {
+            noteTask = "Pas de note sur cette tâche"
+        }
+        print(noteTask)
         if dataBaseManager?.checkTaskExistenceInList(taskName: taskName, list: list ?? List()) == false {
-            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: "")
+            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask)
             return true
         } else {
         self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
