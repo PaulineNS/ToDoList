@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 
-final class DataBaseManager {
-
+class DataBaseManager {
+    
     // MARK: - Variables
     
     private let dataBaseStack: DataBaseStack
@@ -30,12 +30,6 @@ final class DataBaseManager {
         return lists
     }
     
-//    var tasks: [TaskList] {
-//        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
-//        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
-//        return tasks
-//    }
-    
     // MARK: - Initializer
     
     init(dataBaseStack: DataBaseStack) {
@@ -43,16 +37,14 @@ final class DataBaseManager {
         self.managedObjectContext = dataBaseStack.mainContext
     }
     
-    // MARK: - Manage List Entity
-
-    // fait
+    // MARK: - Create Entity
+    
     func createList(name: String) {
         let list = List(context: managedObjectContext)
         list.name = name
         dataBaseStack.saveContext()
     }
     
-    //fait
     func createTask(name: String, list: List, note: String, deadLine: String) {
         let task = TaskList(context: managedObjectContext)
         task.isDone = false
@@ -64,7 +56,8 @@ final class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
-    //fait
+    // MARK: - Update Entity
+
     func updateTaskStatus(taskName: String, list: List, status: Bool, forKey: String) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -79,19 +72,18 @@ final class DataBaseManager {
         }
     }
     
-    //fait
+    // MARK: - Delete Entity
+    
     func deleteAllTasks(list: List) {
         fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
-    //fait
     func deleteAllLists() {
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
-    //fait
     func deleteASpecificList(listName: String) {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -100,26 +92,23 @@ final class DataBaseManager {
         if let objects = try? managedObjectContext.fetch(request) {
             objects.forEach { managedObjectContext.delete($0)}
         }
-        
         dataBaseStack.saveContext()
     }
     
-    //fait
     func deleteASpecificTask(taskName: String, list: List) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
         let predicateTaskName = NSPredicate(format: "name == %@", taskName)
         let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateOwner, predicateTaskName])
         request.predicate = andPredicate
-        
-        
         if let objects = try? managedObjectContext.fetch(request) {
             objects.forEach { managedObjectContext.delete($0)}
         }
         dataBaseStack.saveContext()
     }
     
-    //fait
+    // MARK: - Check Entity existence
+
     func checkListExistence(listName: String) -> Bool {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -130,7 +119,6 @@ final class DataBaseManager {
         return true
     }
     
-    //fait
     func checkTaskExistenceInList(taskName: String, list: List) -> Bool {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)

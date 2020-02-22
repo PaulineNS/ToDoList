@@ -8,24 +8,31 @@
 
 import UIKit
 
-class ListViewController: UIViewController {
-
-    @IBOutlet weak var allTasksTableView: UITableView! { didSet { allTasksTableView.tableFooterView = UIView() }}
+final class ListViewController: UIViewController {
     
-    var dataBaseManager: DataBaseManager?
+    // MARK: - Outlets
+    
+    @IBOutlet private weak var allTasksTableView: UITableView! { didSet { allTasksTableView.tableFooterView = UIView() }}
+    
+    // MARK: - Variables
+    
     var list: List?
-    var task: TaskList?
-    var isSegueFromTableView: Bool?
-
+    private var dataBaseManager: DataBaseManager?
+    private var task: TaskList?
+    private var isSegueFromTableView: Bool?
+    
+    // MARK: - Controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let nibName = UINib(nibName: "ListTableViewCell", bundle: nil)
         allTasksTableView.register(nibName, forCellReuseIdentifier: "ListCell")
-
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
+    
+    // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskVc = segue.destination as? TaskViewController else {return}
@@ -36,12 +43,14 @@ class ListViewController: UIViewController {
         }
     }
     
-    @IBAction func addTaskButtonTapped(_ sender: UIButton) {
+    // MARK: - Actions
+    
+    @IBAction private func addTaskButtonTapped(_ sender: UIButton) {
         isSegueFromTableView = false
         performSegue(withIdentifier: "ListToTask", sender: self)
-        }
+    }
     
-    @IBAction func deleteTheListButtonTapped(_ sender: Any) {
+    @IBAction private func deleteTheListButtonTapped(_ sender: Any) {
         displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
             guard success == true else {return}
             self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
@@ -49,15 +58,17 @@ class ListViewController: UIViewController {
         }
     }
     
+    // MARK: - Methods
     
-    func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
+    private func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
         attributeString.addAttribute(NSAttributedString.Key
             .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
 }
-    
+
+// MARK: - TableView DataSource
 
 extension ListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -70,7 +81,6 @@ extension ListViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         guard let list = list else {return UITableViewCell()}
-
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
             cell.doneTaskButton.isSelected = true
             cell.taskNameLabel.attributedText = defineCrossLineValue(taskName: cell.taskNameLabel.text ?? "", value: 2)
@@ -84,9 +94,7 @@ extension ListViewController: UITableViewDataSource {
             cell.importantTaskButton.isSelected = false
         }
         cell.task = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
-        
         cell.delegate = self
-
         return cell
     }
     
@@ -99,6 +107,8 @@ extension ListViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - TableView Delegate
+
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
@@ -108,18 +118,22 @@ extension ListViewController: UITableViewDelegate {
         label.textColor = .white
         return label
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).isEmpty ?? true ? tableView.bounds.size.height : 0
     }
 }
 
+// MARK: - DidAddNewTaskDelegate
+
 extension ListViewController: DidAddNewTask {
     func addTapped() {
         allTasksTableView.reloadData()
     }
 }
+
+// MARK: - ListTableViewCellDelegate
 
 extension ListViewController: ListTableViewCellDelegate {
     func doneTaskTapped(taskName: String, done: Bool) {
@@ -129,12 +143,6 @@ extension ListViewController: ListTableViewCellDelegate {
     
     func importantTaskTapped(taskName: String, important: Bool) {
         guard let list = list else { return }
-               dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: "isImportant")
+        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: "isImportant")
     }
-
-    
-    
 }
-
-
-

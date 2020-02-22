@@ -8,19 +8,24 @@
 
 import UIKit
 
-class AllListsViewController: UIViewController {
-
-    @IBOutlet weak var allListsTableview: UITableView! { didSet { allListsTableview.tableFooterView = UIView() }}
-    @IBOutlet weak var addListButton: UIButton!
+final class AllListsViewController: UIViewController {
     
-    var dataBaseManager: DataBaseManager?
-    var list: List?
+    // MARK: - Outlets
+    
+    @IBOutlet private weak var allListsTableview: UITableView! { didSet { allListsTableview.tableFooterView = UIView() }}
+    @IBOutlet private weak var addListButton: UIButton!
+    
+    // MARK: - Variables
+    
+    private var dataBaseManager: DataBaseManager?
+    private var list: List?
+    
+    // MARK: - Controller life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let nibName = UINib(nibName: "AllListsTableViewCell", bundle: nil)
         allListsTableview.register(nibName, forCellReuseIdentifier: "allListsCell")
-
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
@@ -31,8 +36,18 @@ class AllListsViewController: UIViewController {
         self.allListsTableview.reloadData()
     }
     
+    // MARK: - Segue
     
-    @IBAction func addListButtonTapped(_ sender: UIButton) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "AllToList" else {return}
+        guard let listVc = segue.destination as? ListViewController else {return}
+        listVc.navigationItem.title = list?.name
+        listVc.list = list
+    }
+    
+    // MARK: - Actions
+    
+    @IBAction private func addListButtonTapped(_ sender: UIButton) {
         displayTextFieldAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
             
@@ -44,21 +59,16 @@ class AllListsViewController: UIViewController {
         }
     }
     
-    @IBAction func deleteAllListsButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction private func deleteAllListsButtonTapped(_ sender: UIBarButtonItem) {
         displayMultiChoiceAlert(title: "Voulez-vous vraiment supprimer toutes vos listes ?", message: "") { (success) in
             guard success == true else {return}
             self.dataBaseManager?.deleteAllLists()
             self.allListsTableview.reloadData()
         }
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "AllToList" else {return}
-        guard let listVc = segue.destination as? ListViewController else {return}
-        listVc.navigationItem.title = list?.name
-        listVc.list = list
-    }
 }
+
+// MARK: - TableView DataSource
 
 extension AllListsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,6 +92,8 @@ extension AllListsViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - TableView Delegate
+
 extension AllListsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
@@ -91,7 +103,7 @@ extension AllListsViewController: UITableViewDelegate {
         label.textColor = .white
         return label
     }
-
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return dataBaseManager?.lists.isEmpty ?? true ? tableView.bounds.size.height : 0
     }

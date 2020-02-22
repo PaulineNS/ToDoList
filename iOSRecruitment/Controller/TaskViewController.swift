@@ -12,24 +12,30 @@ protocol DidAddNewTask {
     func addTapped()
 }
 
-class TaskViewController: UIViewController {
+final class TaskViewController: UIViewController {
     
-    @IBOutlet weak var taskNameTextField: UITextField!
-    @IBOutlet weak var taskNoteTextView: UITextView!
-    @IBOutlet weak var taskDeadlineTextField: UITextField!
-    @IBOutlet weak var addTaskButton: UIButton!
-    @IBOutlet weak var doneTaskButton: UIButton!
-    @IBOutlet weak var importantTaskButton: UIButton!
-    @IBOutlet weak var trashButton: UIButton!
+    // MARK: - Outlets
     
-    var dataBaseManager: DataBaseManager?
+    @IBOutlet private weak var taskNameTextField: UITextField!
+    @IBOutlet private weak var taskNoteTextView: UITextView!
+    @IBOutlet private weak var taskDeadlineTextField: UITextField!
+    @IBOutlet private weak var addTaskButton: UIButton!
+    @IBOutlet private weak var doneTaskButton: UIButton!
+    @IBOutlet private weak var importantTaskButton: UIButton!
+    @IBOutlet private weak var trashButton: UIButton!
+    
+    // MARK: - Variables
+    
     var didAddNewTask: DidAddNewTask?
     var list: List?
     var task: TaskList?
+    private var dataBaseManager: DataBaseManager?
     private var datePicker: UIDatePicker?
     private let minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
     private var deadLinedate: String?
-
+    
+    // MARK: - Controller life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
@@ -46,7 +52,58 @@ class TaskViewController: UIViewController {
         dismissTheView()
     }
     
-    func prepareTheView() {
+    // MARK: - Actions
+    
+    @objc private func dateChanged(datePicker: UIDatePicker) {
+        deadLinedate = convertDateToString(date: datePicker.date)
+        taskDeadlineTextField.text = deadLinedate
+    }
+    
+    @IBAction private func backButtonTapped(_ sender: UIButton) {
+        dismissTheView()
+    }
+    
+    @IBAction private func addTaskButtonTapped(_ sender: UIButton) {
+        if taskNameTextField.text != "" && createTask() == true {
+            dismissTheView()
+        } else {
+            displayMessageAlert(title: "Ajout impossible", message: "Veuillez ajouter un titre à votre tâche")
+        }
+    }
+    
+    @IBAction private func doneTaskButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isDone")
+            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
+        } else {
+            sender.isSelected = true
+            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isDone")
+        }
+    }
+    
+    @IBAction private func importantTaskButtonTapped(_ sender: UIButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isImportant")
+        } else {
+            sender.isSelected = true
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isImportant")
+        }
+    }
+    
+    @IBAction private func deleteTaskButtonTapped(_ sender: UIButton) {
+        displayMultiChoiceAlert(title: "Voulez-vous supprimer cette tâche ?", message: "") { (success) in
+            guard success == true else {return}
+            self.dataBaseManager?.deleteASpecificTask(taskName: self.task?.name ?? "", list: self.list ?? List())
+            self.dismissTheView()
+        }
+    }
+    
+    // MARK: - Methods
+    
+    private func prepareTheView() {
         if task == nil {
             manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true, border: .roundedRect)
         } else {
@@ -69,15 +126,14 @@ class TaskViewController: UIViewController {
         }
     }
     
-    func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
+    private func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
         attributeString.addAttribute(NSAttributedString.Key
             .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
         return attributeString
     }
     
-    func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
-         
+    private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
         importantTaskButton.isHidden = isDisplayElementsHidden
         doneTaskButton.isHidden = isDisplayElementsHidden
         trashButton.isHidden = isDisplayElementsHidden
@@ -89,7 +145,7 @@ class TaskViewController: UIViewController {
         taskNameTextField.borderStyle = border
     }
     
-    func manageDatePicker() {
+    private func manageDatePicker() {
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.minimumDate = minimumDate
@@ -98,16 +154,7 @@ class TaskViewController: UIViewController {
         datePicker?.addTarget(self, action: #selector(TaskViewController.dateChanged(datePicker:)), for: .valueChanged)
     }
     
-    @objc private func dateChanged(datePicker: UIDatePicker) {
-        deadLinedate = convertDateToString(date: datePicker.date)
-        taskDeadlineTextField.text = deadLinedate
-    }
-
-    
-//    var isSegueFromNew: Bool?
-    
-    
-    func createTask() -> Bool {
+    private func createTask() -> Bool {
         guard let taskName = taskNameTextField.text, let ownerList = list, let taskNote = taskNoteTextView.text else { return false }
         var noteTask = taskNote.trimmingCharacters(in: .whitespaces)
         var dateTask = deadLinedate
@@ -121,55 +168,13 @@ class TaskViewController: UIViewController {
             self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask, deadLine: dateTask ?? "hello")
             return true
         } else {
-        self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
-        return false
+            self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
+            return false
         }
     }
     
-    func dismissTheView() {
+    private func dismissTheView() {
         didAddNewTask?.addTapped()
         self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func backButtonTapped(_ sender: UIButton) {
-        dismissTheView()
-    }
-    
-    @IBAction func addTaskButtonTapped(_ sender: UIButton) {
-        if taskNameTextField.text != "" && createTask() == true {
-            dismissTheView()
-        } else {
-            displayMessageAlert(title: "Ajout impossible", message: "Veuillez ajouter un titre à votre tâche")
-        }
-    }
-    @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isDone")
-            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
-        } else {
-            sender.isSelected = true
-            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isDone")
-            
-        }
-    }
-    
-    @IBAction func importantTaskButtonTapped(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isImportant")
-        } else {
-            sender.isSelected = true
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isImportant")
-        }
-    }
-    
-    @IBAction func deleteTaskButtonTapped(_ sender: UIButton) {
-        displayMultiChoiceAlert(title: "Voulez-vous supprimer cette tâche ?", message: "") { (success) in
-            guard success == true else {return}
-            self.dataBaseManager?.deleteASpecificTask(taskName: self.task?.name ?? "", list: self.list ?? List())
-            self.dismissTheView()
-    }
     }
 }

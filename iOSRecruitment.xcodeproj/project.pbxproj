@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -137,7 +137,6 @@
 				A14C1EBC7C757202CE5FF39D /* Pods-iOSRecruitmentTests.debug.xcconfig */,
 				81C27AE877280F673C37B140 /* Pods-iOSRecruitmentTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -165,9 +164,8 @@
 		5601CF5023FFB49E0044BE55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */,
-				5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */,
-				5601CF5E23FFC25C0044BE55 /* DataBaseManager.swift */,
+				56EF13DC2401CD7E0056DAC3 /* Protocol */,
+				56EF13DB2401CD640056DAC3 /* Database */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -214,6 +212,23 @@
 				565AF80D2401678A00B93C77 /* UIViewController+Date.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		56EF13DB2401CD640056DAC3 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				5601CF4B23FFB4900044BE55 /* ToDoList.xcdatamodeld */,
+				5601CF5C23FFC2230044BE55 /* DataBaseStack.swift */,
+				5601CF5E23FFC25C0044BE55 /* DataBaseManager.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		56EF13DC2401CD7E0056DAC3 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		57A30E33A4FBEE1B217944C5 /* Frameworks */ = {
