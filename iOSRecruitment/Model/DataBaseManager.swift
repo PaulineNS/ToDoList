@@ -72,9 +72,14 @@ final class DataBaseManager {
             dataBaseStack.saveContext()
         }
     }
-
-//    func deleteAllTasks() {
-//        lists.forEach { managedObjectContext.delete($0) }
-//        dataBaseStack.saveContext()
-//    }
+    
+    func deleteAllTasks(list: List) {
+        fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
+        dataBaseStack.saveContext()
+    }
+    
+    func deleteAllLists() {
+        lists.forEach { managedObjectContext.delete($0) }
+        dataBaseStack.saveContext()
+    }
 }

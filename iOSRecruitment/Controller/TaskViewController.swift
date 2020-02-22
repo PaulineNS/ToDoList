@@ -17,7 +17,6 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var taskNameTextField: UITextField!
     @IBOutlet weak var taskNoteTextView: UITextView!
     @IBOutlet weak var taskDeadlineTextField: UITextField!
-    @IBOutlet weak var updateTaskButton: UIButton!
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var doneTaskButton: UIButton!
     @IBOutlet weak var importantTaskButton: UIButton!
@@ -30,7 +29,6 @@ class TaskViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateTaskButton.isHidden = true
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
         let font = UIFont.preferredFont(forTextStyle: .largeTitle)
@@ -67,8 +65,6 @@ class TaskViewController: UIViewController {
                 print("false isImportant")
                 importantTaskButton.isSelected = false
             }
-            
-            
         }
     }
     
@@ -83,7 +79,6 @@ class TaskViewController: UIViewController {
         
         
         addTaskButton.isHidden = isUpdateElementsHidden
-        updateTaskButton.isHidden = isDisplayElementsHidden
         taskNameTextField.isUserInteractionEnabled = isTxtFieldEnable
         taskNoteTextView.isUserInteractionEnabled = isTxtFieldEnable
         taskDeadlineTextField.isUserInteractionEnabled = isTxtFieldEnable
@@ -112,10 +107,6 @@ class TaskViewController: UIViewController {
     @IBAction func trashButtonTapped(_ sender: UIButton) {
         dismissTheView()
     }
-    
-    @IBAction func updateTaskButtonTapped(_ sender: UIButton) {
-    }
-    
     
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
         createTask()
