@@ -31,14 +31,27 @@ class AllListsViewController: UIViewController {
         self.allListsTableview.reloadData()
     }
     
+    
     @IBAction func addListButtonTapped(_ sender: UIButton) {
-        displayAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
+        displayTextFieldAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
+            
+            guard self.dataBaseManager?.checkListExistence(listName: listName) == false else {
+                self.displayMessageAlert(title: "Une liste portant ce nom existe déjà", message: "Veuillez en choisir un autre")
+                return}
             self.dataBaseManager?.createList(name: listName)
             self.allListsTableview.reloadData()
         }
     }
     
+    @IBAction func deleteAllListsButtonTapped(_ sender: UIBarButtonItem) {
+        displayMultiChoiceAlert(title: "Voulez-vous vraiment supprimer toutes vos listes ?", message: "") { (success) in
+            guard success == true else {return}
+            self.dataBaseManager?.deleteAllLists()
+            self.allListsTableview.reloadData()
+        }
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard segue.identifier == "AllToList" else {return}
         guard let listVc = segue.destination as? ListViewController else {return}

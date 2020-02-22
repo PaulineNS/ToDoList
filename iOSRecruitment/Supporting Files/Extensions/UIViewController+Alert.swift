@@ -13,7 +13,7 @@ extension UIViewController {
     /**
      * Display an alert to enter the list and task name
      */
-    func displayAlert(title: String, message: String, placeholder: String ,handlerTaskName: @escaping (String?) -> Void) {
+    func displayTextFieldAlert(title: String, message: String, placeholder: String ,handlerTaskName: @escaping (String?) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addTextField { textField in
             textField.placeholder = placeholder
@@ -25,4 +25,24 @@ extension UIViewController {
         alertController.addAction(addAction)
         present(alertController, animated: true, completion: nil)
     }
+    
+    func displayMultiChoiceAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "Oui", style: UIAlertAction.Style.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            completion(true)
+        }))
+        alert.addAction(UIAlertAction(title: "Non", style: UIAlertAction.Style.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            completion(false)
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func displayMessageAlert(title: String, message: String){
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+
 }

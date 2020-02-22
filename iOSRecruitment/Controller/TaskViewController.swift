@@ -20,6 +20,7 @@ class TaskViewController: UIViewController {
     @IBOutlet weak var addTaskButton: UIButton!
     @IBOutlet weak var doneTaskButton: UIButton!
     @IBOutlet weak var importantTaskButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
     
     var dataBaseManager: DataBaseManager?
     var didAddNewTask: DidAddNewTask?
@@ -89,10 +90,15 @@ class TaskViewController: UIViewController {
     var isSegueFromNew: Bool?
     
     
-    func createTask() {
-        guard let taskName = taskNameTextField.text, let ownerList = list else { return }
-        print(taskName)
-        self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: "")
+    func createTask() -> Bool {
+        guard let taskName = taskNameTextField.text, let ownerList = list else { return false }
+        if dataBaseManager?.checkTaskExistenceInList(taskName: taskName, list: list ?? List()) == false {
+            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: "")
+            return true
+        } else {
+        self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
+        return false
+        }
     }
     
     func dismissTheView() {
@@ -104,13 +110,10 @@ class TaskViewController: UIViewController {
         dismissTheView()
     }
     
-    @IBAction func trashButtonTapped(_ sender: UIButton) {
-        dismissTheView()
-    }
-    
     @IBAction func addTaskButtonTapped(_ sender: UIButton) {
-        createTask()
-        dismissTheView()
+        if createTask() == true {
+            dismissTheView()
+        }
     }
     @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
@@ -133,5 +136,13 @@ class TaskViewController: UIViewController {
             sender.isSelected = true
             dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isImportant")
         }
+    }
+    
+    @IBAction func deleteTaskButtonTapped(_ sender: UIButton) {
+        displayMultiChoiceAlert(title: "Voulez-vous supprimer cette tâche ?", message: "") { (success) in
+            guard success == true else {return}
+            self.dataBaseManager?.deleteASpecificTask(taskName: self.task?.name ?? "", list: self.list ?? List())
+            self.dismissTheView()
+    }
     }
 }

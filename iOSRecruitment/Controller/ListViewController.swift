@@ -41,11 +41,16 @@ class ListViewController: UIViewController {
         performSegue(withIdentifier: "ListToTask", sender: self)
         }
     
-//    func crossTheTask(taskName: String) -> NSMutableAttributedString {
-//        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-//        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: 2, range: NSMakeRange(0, attributeString.length))
-//        return attributeString
-//    }
+    @IBAction func deleteTheListButtonTapped(_ sender: Any) {
+        displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
+            guard success == true else {return}
+            self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
+            self.navigationController?.popViewController(animated: true)
+//            self.dataBaseManager?.deleteAllLists()
+//            self.allListsTableview.reloadData()
+        }
+    }
+    
     
     func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
         let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)

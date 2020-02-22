@@ -82,4 +82,62 @@ final class DataBaseManager {
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
+    
+    func deleteASpecificList(listName: String) {
+        let request: NSFetchRequest<List> = List.fetchRequest()
+        let predicateListName = NSPredicate(format: "name == %@", listName)
+        request.predicate = predicateListName
+        
+        if let objects = try? managedObjectContext.fetch(request) {
+            objects.forEach { managedObjectContext.delete($0)}
+        }
+        
+        dataBaseStack.saveContext()
+    }
+    
+    func deleteASpecificTask(taskName: String, list: List) {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        let predicateOwner = NSPredicate(format: "owner == %@", list)
+        let predicateTaskName = NSPredicate(format: "name == %@", taskName)
+        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateOwner, predicateTaskName])
+        request.predicate = andPredicate
+        
+        
+        if let objects = try? managedObjectContext.fetch(request) {
+            objects.forEach { managedObjectContext.delete($0)}
+        }
+        dataBaseStack.saveContext()
+    }
+    
+    func checkListExistence(listName: String) -> Bool {
+        let request: NSFetchRequest<List> = List.fetchRequest()
+        let predicateListName = NSPredicate(format: "name == %@", listName)
+        request.predicate = predicateListName
+        
+        guard let lists = try? managedObjectContext.fetch(request) else { return false }
+        if lists.isEmpty {return false}
+        return true
+    }
+    
+    func checkTaskExistenceInList(taskName: String, list: List) -> Bool {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        let predicateOwner = NSPredicate(format: "owner == %@", list)
+        let predicateTaskName = NSPredicate(format: "name == %@", taskName)
+        let andPredicate = NSCompoundPredicate(type: .and, subpredicates: [predicateOwner, predicateTaskName])
+        request.predicate = andPredicate
+        guard let tasks = try? managedObjectContext.fetch(request) else { return false }
+        if tasks.isEmpty {return false}
+        return true
+    }
+    
+    
+    
+//    func checkIfRecipeIsInFavorite(recipeName: String) -> Bool {
+//        let request: NSFetchRequest<FavoritesRecipesList> = FavoritesRecipesList.fetchRequest()
+//        request.predicate = NSPredicate(format: "name == %@", recipeName)
+//        
+//        guard let recipes = try? managedObjectContext.fetch(request) else { return false }
+//        if recipes.isEmpty {return false}
+//        return true
+//    }
 }

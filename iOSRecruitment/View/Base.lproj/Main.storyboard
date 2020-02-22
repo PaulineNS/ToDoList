@@ -48,6 +48,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hdJ-HA-t1I">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </navigationBar>
                     <connections>
                         <segue destination="6bu-p4-PWr" kind="relationship" relationship="rootViewController" id="bxZ-cw-gXV"/>
@@ -57,7 +58,7 @@
             </objects>
             <point key="canvasLocation" x="3603" y="-250"/>
         </scene>
-        <!--Mes Listes-->
+        <!--Mes listes-->
         <scene sceneID="9IH-vg-6kT">
             <objects>
                 <viewController id="6bu-p4-PWr" customClass="AllListsViewController" customModule="iOSRecruitment" customModuleProvider="target" sceneMemberID="viewController">
@@ -96,7 +97,14 @@
                         <viewLayoutGuide key="safeArea" id="TRm-mc-jAZ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Listes" image="list" id="OFh-mT-wuq"/>
-                    <navigationItem key="navigationItem" title="Mes Listes" id="YTH-AR-k5Z"/>
+                    <navigationItem key="navigationItem" title="Mes listes" id="alx-ZW-raP">
+                        <barButtonItem key="rightBarButtonItem" title="Tout supprimer" id="RFW-iK-UCe">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="deleteAllListsButtonTapped:" destination="6bu-p4-PWr" id="cFc-WS-X4a"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addListButton" destination="zXB-MG-pfl" id="vjs-Sa-gG3"/>
                         <outlet property="allListsTableview" destination="KHK-k1-pT9" id="4vd-Zf-QsH"/>
@@ -135,6 +143,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hk7-7N-Zav">
                                 <rect key="frame" x="379" y="778" width="25" height="25"/>
                                 <state key="normal" image="trash"/>
+                                <connections>
+                                    <action selector="deleteTheListButtonTapped:" destination="RvP-mK-uGO" eventType="touchUpInside" id="WG6-cX-rgp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -173,7 +184,7 @@
                                 <rect key="frame" x="369" y="743" width="25" height="25"/>
                                 <state key="normal" image="trash"/>
                                 <connections>
-                                    <action selector="trashButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="NRT-S1-F1G"/>
+                                    <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sS-e0-Xj5">
@@ -304,6 +315,7 @@
                         <outlet property="taskDeadlineTextField" destination="Ibb-d4-n8m" id="uyl-tu-lSB"/>
                         <outlet property="taskNameTextField" destination="xoT-Yh-Q8b" id="uEb-FA-z4W"/>
                         <outlet property="taskNoteTextView" destination="6rL-7K-Ygu" id="BEJ-ac-uko"/>
+                        <outlet property="trashButton" destination="R5P-2r-F2N" id="lYR-D7-H0S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JIz-j6-vM8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
