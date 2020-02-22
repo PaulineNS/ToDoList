@@ -39,15 +39,15 @@
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="Kew-jG-8uX"/>
                                             <constraint firstAttribute="width" secondItem="RWm-fe-MZA" secondAttribute="height" multiplier="1:1" id="YmU-yG-lFA"/>
                                         </constraints>
-                                        <state key="normal" image="uncheckBox"/>
-                                        <state key="selected" image="checkBox"/>
+                                        <state key="normal" image="blueUncheckBox"/>
+                                        <state key="selected" image="blueCheckBox"/>
                                         <connections>
                                             <action selector="doneTaskButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="T2r-qZ-HYn"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W4o-la-yel">
                                         <rect key="frame" x="59" y="0.0" width="152" height="54"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -58,8 +58,8 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="wRF-cI-adX"/>
                                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="60" id="xb0-th-ekl"/>
                                         </constraints>
-                                        <state key="normal" image="emptyFlag"/>
-                                        <state key="selected" image="fullFlag"/>
+                                        <state key="normal" image="emptyYellowFlag"/>
+                                        <state key="selected" image="yellowFlag"/>
                                         <connections>
                                             <action selector="importantTaskButtonTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="BoQ-lH-878"/>
                                         </connections>
@@ -99,9 +99,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="checkBox" width="25" height="25"/>
-        <image name="emptyFlag" width="25" height="25"/>
-        <image name="fullFlag" width="25" height="25"/>
-        <image name="uncheckBox" width="25" height="25"/>
+        <image name="blueCheckBox" width="25" height="25"/>
+        <image name="blueUncheckBox" width="25" height="25"/>
+        <image name="emptyYellowFlag" width="25" height="25"/>
+        <image name="yellowFlag" width="25" height="25"/>
     </resources>
 </document>

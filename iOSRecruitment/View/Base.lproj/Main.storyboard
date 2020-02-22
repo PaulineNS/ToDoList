@@ -84,8 +84,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zXB-MG-pfl">
-                                <rect key="frame" x="90" y="758" width="234" height="40"/>
+                                <rect key="frame" x="82" y="758" width="250" height="40"/>
                                 <color key="backgroundColor" red="0.2983173131942749" green="0.72145950794219971" blue="0.79300624132156372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="UL9-dU-5tU"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Ajouter une liste ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -111,12 +114,11 @@
                         </subviews>
                         <color key="backgroundColor" red="0.32854151725769043" green="0.33613163232803345" blue="0.37490159273147583" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="zXB-MG-pfl" firstAttribute="leading" secondItem="TRm-mc-jAZ" secondAttribute="leading" constant="90" id="5rP-zP-ITg"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="leading" secondItem="TRm-mc-jAZ" secondAttribute="leading" id="C5G-7g-WmP"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="top" secondItem="TRm-mc-jAZ" secondAttribute="top" id="Rua-lc-BXb"/>
                             <constraint firstItem="TRm-mc-jAZ" firstAttribute="bottom" secondItem="zXB-MG-pfl" secondAttribute="bottom" constant="15" id="cET-lB-beq"/>
-                            <constraint firstItem="zXB-MG-pfl" firstAttribute="top" secondItem="KHK-k1-pT9" secondAttribute="bottom" constant="10" id="d2w-yA-kYQ"/>
-                            <constraint firstItem="TRm-mc-jAZ" firstAttribute="trailing" secondItem="zXB-MG-pfl" secondAttribute="trailing" constant="90" id="kSB-HF-7EU"/>
+                            <constraint firstItem="zXB-MG-pfl" firstAttribute="centerX" secondItem="8XO-HA-FO4" secondAttribute="centerX" id="gsF-ce-3u9"/>
+                            <constraint firstItem="zXB-MG-pfl" firstAttribute="top" secondItem="KHK-k1-pT9" secondAttribute="bottom" constant="10" id="nBf-pM-EqV"/>
                             <constraint firstItem="KHK-k1-pT9" firstAttribute="trailing" secondItem="TRm-mc-jAZ" secondAttribute="trailing" id="rTH-dp-GK5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TRm-mc-jAZ"/>
@@ -150,8 +152,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUM-kR-FjI">
-                                <rect key="frame" x="90" y="758" width="234" height="40"/>
+                                <rect key="frame" x="82" y="758" width="250" height="40"/>
                                 <color key="backgroundColor" red="0.29831731319999999" green="0.72145950790000002" blue="0.79300624129999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="250" id="zX1-HR-bND"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="Ajouter une tache ">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -173,28 +178,26 @@
                                     <outlet property="delegate" destination="RvP-mK-uGO" id="QGT-Qq-B26"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hk7-7N-Zav">
-                                <rect key="frame" x="379" y="778" width="25" height="25"/>
-                                <state key="normal" image="trash"/>
-                                <connections>
-                                    <action selector="deleteTheListButtonTapped:" destination="RvP-mK-uGO" eventType="touchUpInside" id="WG6-cX-rgp"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.32926684617996216" green="0.33952775597572327" blue="0.37492364645004272" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="bottom" secondItem="hk7-7N-Zav" secondAttribute="bottom" constant="10" id="46m-d3-cdU"/>
+                            <constraint firstItem="YUM-kR-FjI" firstAttribute="centerX" secondItem="dvL-0s-Zoe" secondAttribute="centerX" id="E5a-lG-8UK"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="top" secondItem="YZ5-hq-ESP" secondAttribute="top" id="GSw-IJ-SQ4"/>
                             <constraint firstItem="YZ5-hq-ESP" firstAttribute="bottom" secondItem="YUM-kR-FjI" secondAttribute="bottom" constant="15" id="JeP-b1-iCD"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="trailing" secondItem="YZ5-hq-ESP" secondAttribute="trailing" id="evY-bb-EIY"/>
-                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="trailing" secondItem="YUM-kR-FjI" secondAttribute="trailing" constant="90" id="nqt-ca-fGG"/>
                             <constraint firstItem="YUM-kR-FjI" firstAttribute="top" secondItem="mAd-uL-oi7" secondAttribute="bottom" constant="10" id="o8n-sd-bHS"/>
-                            <constraint firstItem="YZ5-hq-ESP" firstAttribute="trailing" secondItem="hk7-7N-Zav" secondAttribute="trailing" constant="10" id="pZZ-N7-hNQ"/>
                             <constraint firstItem="mAd-uL-oi7" firstAttribute="leading" secondItem="YZ5-hq-ESP" secondAttribute="leading" id="rMQ-E1-Mkp"/>
-                            <constraint firstItem="YUM-kR-FjI" firstAttribute="leading" secondItem="YZ5-hq-ESP" secondAttribute="leading" constant="90" id="w3U-vb-AW8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="YZ5-hq-ESP"/>
                     </view>
+                    <navigationItem key="navigationItem" id="brD-oC-3Bm">
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="yellowTrash" id="OKB-k5-bYE">
+                            <color key="tintColor" red="0.97779482600000001" green="0.76686447859999995" blue="0.1977086663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="deleteTheListButtonTapped:" destination="RvP-mK-uGO" id="jnw-dv-CC1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="allTasksTableView" destination="mAd-uL-oi7" id="0SO-7N-irk"/>
                         <segue destination="BWw-52-nHq" kind="presentation" identifier="ListToTask" id="du9-ne-CzB"/>
@@ -216,27 +219,23 @@
                                 <rect key="frame" x="0.0" y="342" width="414" height="500"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9sS-e0-Xj5">
-                                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                                        <rect key="frame" x="10" y="10" width="60" height="40"/>
+                                        <color key="backgroundColor" red="0.32287484407424927" green="0.77521461248397827" blue="0.85108602046966553" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="d3j-gL-V2c"/>
-                                            <constraint firstAttribute="width" constant="40" id="k78-Lz-VNL"/>
+                                            <constraint firstAttribute="height" constant="40" id="2kH-pk-qkC"/>
+                                            <constraint firstAttribute="width" constant="60" id="LPa-yN-TKY"/>
                                         </constraints>
-                                        <state key="normal" title="&lt;">
+                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <state key="normal" title="←">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="backButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="g2x-1V-Vw1"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
-                                        <rect key="frame" x="364" y="10" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="B65-9g-whG"/>
-                                            <constraint firstAttribute="width" constant="40" id="aZ9-Vc-txL"/>
-                                        </constraints>
-                                        <state key="normal" image="trash"/>
-                                        <connections>
-                                            <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="AwY-U4-g8Z">
@@ -246,7 +245,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-x2-PWz">
-                                                        <rect key="frame" x="10" y="48" width="280" height="204"/>
+                                                        <rect key="frame" x="10" y="23" width="280" height="254"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9kt-ZZ-VhQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="280" height="40"/>
@@ -257,8 +256,8 @@
                                                                             <constraint firstAttribute="width" constant="40" id="hSJ-uc-n7m"/>
                                                                             <constraint firstAttribute="height" constant="40" id="wt8-R3-iad"/>
                                                                         </constraints>
-                                                                        <state key="normal" image="uncheckBox"/>
-                                                                        <state key="selected" image="checkBox"/>
+                                                                        <state key="normal" image="blueUncheckBox"/>
+                                                                        <state key="selected" image="blueCheckBox"/>
                                                                         <connections>
                                                                             <action selector="doneTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="6lJ-0M-6ed"/>
                                                                         </connections>
@@ -274,8 +273,8 @@
                                                                             <constraint firstAttribute="width" constant="40" id="Qgx-nz-ocg"/>
                                                                             <constraint firstAttribute="height" constant="40" id="yyb-ER-5b0"/>
                                                                         </constraints>
-                                                                        <state key="normal" image="emptyFlag"/>
-                                                                        <state key="selected" image="fullFlag"/>
+                                                                        <state key="normal" image="emptyYellowFlag"/>
+                                                                        <state key="selected" image="yellowFlag"/>
                                                                         <connections>
                                                                             <action selector="importantTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="odX-Pr-pbC"/>
                                                                         </connections>
@@ -297,6 +296,13 @@
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                             </textView>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
+                                                                <rect key="frame" x="0.0" y="229" width="280" height="25"/>
+                                                                <state key="normal" image="yellowTrash"/>
+                                                                <connections>
+                                                                    <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
+                                                                </connections>
+                                                            </button>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -335,13 +341,11 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.4802358706009095" green="0.48977874417576878" blue="0.50499029692054398" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="R5P-2r-F2N" firstAttribute="top" secondItem="cbf-Nu-o0v" secondAttribute="top" constant="10" id="BxP-TF-wNR"/>
                                     <constraint firstItem="9sS-e0-Xj5" firstAttribute="top" secondItem="cbf-Nu-o0v" secondAttribute="top" constant="10" id="X6Q-qN-CFY"/>
                                     <constraint firstItem="AwY-U4-g8Z" firstAttribute="centerY" secondItem="cbf-Nu-o0v" secondAttribute="centerY" id="ZEd-Bs-Iaq"/>
                                     <constraint firstItem="9sS-e0-Xj5" firstAttribute="leading" secondItem="cbf-Nu-o0v" secondAttribute="leading" constant="10" id="ZXP-0w-4k9"/>
                                     <constraint firstAttribute="height" constant="500" id="cYx-ef-GKv"/>
                                     <constraint firstItem="AwY-U4-g8Z" firstAttribute="centerX" secondItem="cbf-Nu-o0v" secondAttribute="centerX" id="cZC-Kl-Xdp"/>
-                                    <constraint firstAttribute="trailing" secondItem="R5P-2r-F2N" secondAttribute="trailing" constant="10" id="eN4-y2-5SU"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -408,12 +412,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="checkBox" width="25" height="25"/>
+        <image name="blueCheckBox" width="25" height="25"/>
+        <image name="blueUncheckBox" width="25" height="25"/>
         <image name="checkLogo" width="699" height="545"/>
-        <image name="emptyFlag" width="25" height="25"/>
-        <image name="fullFlag" width="25" height="25"/>
+        <image name="emptyYellowFlag" width="25" height="25"/>
         <image name="list" width="25" height="25"/>
-        <image name="trash" width="25" height="25"/>
-        <image name="uncheckBox" width="25" height="25"/>
+        <image name="yellowFlag" width="25" height="25"/>
+        <image name="yellowTrash" width="25" height="25"/>
     </resources>
 </document>
