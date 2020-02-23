@@ -200,6 +200,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="allTasksTableView" destination="mAd-uL-oi7" id="0SO-7N-irk"/>
+                        <outlet property="trashButton" destination="OKB-k5-bYE" id="jxk-eL-tfc"/>
                         <segue destination="BWw-52-nHq" kind="presentation" identifier="ListToTask" id="du9-ne-CzB"/>
                     </connections>
                 </viewController>
@@ -245,7 +246,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-x2-PWz">
-                                                        <rect key="frame" x="20" y="23" width="260" height="254"/>
+                                                        <rect key="frame" x="20" y="29.5" width="260" height="241"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9kt-ZZ-VhQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
@@ -262,9 +263,9 @@
                                                                             <action selector="doneTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="6lJ-0M-6ed"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Tâche" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xoT-Yh-Q8b">
-                                                                        <rect key="frame" x="45" y="6" width="170" height="34"/>
-                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tâche" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="xoT-Yh-Q8b">
+                                                                        <rect key="frame" x="45" y="12" width="170" height="28"/>
+                                                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                     </textField>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="My4-BF-q3M">
@@ -281,23 +282,26 @@
                                                                     </button>
                                                                 </subviews>
                                                             </stackView>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ajouter une échance" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-d4-n8m">
-                                                                <rect key="frame" x="0.0" y="65" width="260" height="34"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Ajouter une échance" textAlignment="center" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ibb-d4-n8m">
+                                                                <rect key="frame" x="0.0" y="65" width="260" height="21"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits"/>
                                                             </textField>
-                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Ajouter une note " translatesAutoresizingMaskIntoConstraints="NO" id="6rL-7K-Ygu">
-                                                                <rect key="frame" x="0.0" y="124" width="260" height="80"/>
+                                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Ajouter une note" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rL-7K-Ygu">
+                                                                <rect key="frame" x="0.0" y="111" width="260" height="80"/>
                                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="80" id="rga-e7-Bsr"/>
                                                                 </constraints>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                                <connections>
+                                                                    <outlet property="delegate" destination="BWw-52-nHq" id="WhU-RR-buL"/>
+                                                                </connections>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
-                                                                <rect key="frame" x="0.0" y="229" width="260" height="25"/>
+                                                                <rect key="frame" x="0.0" y="216" width="260" height="25"/>
                                                                 <state key="normal" image="yellowTrash"/>
                                                                 <connections>
                                                                     <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
@@ -409,7 +413,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3xs-8Q-BT3">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="148.5" width="414" height="664.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <connections>
                                     <outlet property="dataSource" destination="m56-Kh-2VF" id="dXu-vd-4hX"/>
@@ -419,10 +423,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.32840067148208618" green="0.33642587065696716" blue="0.37870380282402039" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="leading" secondItem="kkz-N5-5y3" secondAttribute="leading" id="XqG-5T-2yE"/>
-                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="bottom" secondItem="kkz-N5-5y3" secondAttribute="bottom" id="fK7-fT-0uW"/>
-                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="top" secondItem="IBz-Wg-hFk" secondAttribute="top" id="g3H-Li-qqe"/>
-                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="trailing" secondItem="kkz-N5-5y3" secondAttribute="trailing" id="hAz-vm-4I9"/>
+                            <constraint firstItem="kkz-N5-5y3" firstAttribute="bottom" secondItem="3xs-8Q-BT3" secondAttribute="bottom" id="5JC-iZ-d6J"/>
+                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="leading" secondItem="kkz-N5-5y3" secondAttribute="leading" id="YXc-eL-3S5"/>
+                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="trailing" secondItem="kkz-N5-5y3" secondAttribute="trailing" id="dLD-oa-ZAd"/>
+                            <constraint firstItem="3xs-8Q-BT3" firstAttribute="top" secondItem="kkz-N5-5y3" secondAttribute="top" id="lo7-nL-Vik"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kkz-N5-5y3"/>
                     </view>
@@ -434,7 +438,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpb-nC-5c4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4574" y="515"/>
+            <point key="canvasLocation" x="4573.913043478261" y="514.95535714285711"/>
         </scene>
         <!--Importantes-->
         <scene sceneID="BN3-bQ-qTH">
@@ -443,7 +447,7 @@
                     <tabBarItem key="tabBarItem" title="Importantes" image="yellowFlag" id="aJ9-oA-i9A"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="4eh-K3-4GC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
@@ -473,6 +477,6 @@
         <image name="yellowTrash" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CD3-rl-AmN"/>
+        <segue reference="du9-ne-CzB"/>
     </inferredMetricsTieBreakers>
 </document>

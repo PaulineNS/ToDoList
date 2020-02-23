@@ -104,8 +104,9 @@ final class TaskViewController: UIViewController {
     /// Prepare the view according task status : isDone and isImportant
     private func prepareTheView() {
         guard task == nil else {
-            manageElementVisibility(isUpdateElementsHidden: true, isDisplayElementsHidden: false, isTxtFieldEnable: false, border: .none)
+            manageElementVisibility(isUpdateElementsHidden: true, isDisplayElementsHidden: false, isTxtFieldEnable: false)
             taskNoteTextView.text = task?.note
+            taskNoteTextView.textColor = UIColor.black
             taskNameTextField.text = task?.name
             taskDeadlineTextField.text = task?.deadline
             if task?.isDone == true {
@@ -121,11 +122,11 @@ final class TaskViewController: UIViewController {
                 importantTaskButton.isSelected = false
             }
             return }
-        manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true, border: .roundedRect)
+        manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true)
     }
     
     /// Show or hide some elements of the view
-    private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
+    private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool) {
         importantTaskButton.isHidden = isDisplayElementsHidden
         doneTaskButton.isHidden = isDisplayElementsHidden
         trashButton.isHidden = isDisplayElementsHidden
@@ -133,8 +134,6 @@ final class TaskViewController: UIViewController {
         taskNameTextField.isUserInteractionEnabled = isTxtFieldEnable
         taskNoteTextView.isUserInteractionEnabled = isTxtFieldEnable
         taskDeadlineTextField.isUserInteractionEnabled = isTxtFieldEnable
-        taskDeadlineTextField.borderStyle = border
-        taskNameTextField.borderStyle = border
     }
     
     /// Create the date pickerView
@@ -167,5 +166,16 @@ final class TaskViewController: UIViewController {
     private func dismissTheView() {
         dismissTaskViewDelegate?.leaveTheView()
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension TaskViewController: UITextViewDelegate {
+        
+    // when user start editing
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if taskNoteTextView.text == "Ajouter une note" {
+            taskNoteTextView.text = ""
+            taskNoteTextView.textColor = UIColor.black
+        }
     }
 }

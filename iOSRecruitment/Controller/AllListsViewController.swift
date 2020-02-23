@@ -104,8 +104,8 @@ extension AllListsViewController: UITableViewDataSource {
             guard let listName = self.dataBaseManager?.lists[indexPath.row].name, let list = self.dataBaseManager?.lists[indexPath.row] else {return}
             self.displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
                 guard success == true else {return}
-                self.dataBaseManager?.deleteASpecificList(listName: listName)
                 self.dataBaseManager?.deleteAllTasks(list: list)
+                self.dataBaseManager?.deleteASpecificList(listName: listName)
                 self.allListsTableview.reloadData()
             }
         }
@@ -131,16 +131,5 @@ extension AllListsViewController: UITableViewDelegate {
     /// Display the tableView footer depending the number of elements in favoritesRecipes
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return dataBaseManager?.lists.isEmpty ?? true ? tableView.bounds.size.height : 0
-    }
-    
-    /// Cell animation
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let translation = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        cell.layer.transform = translation
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.75) {
-            cell.layer.transform = CATransform3DIdentity
-            cell.alpha = 1
-        }
     }
 }

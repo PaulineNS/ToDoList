@@ -12,6 +12,7 @@ final class ListViewController: UIViewController {
     
     // MARK: - Outlets
     
+    @IBOutlet weak var trashButton: UIBarButtonItem!
     @IBOutlet private weak var allTasksTableView: UITableView! { didSet { allTasksTableView.tableFooterView = UIView() }}
     
     // MARK: - Variables
@@ -42,6 +43,8 @@ final class ListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskVc = segue.destination as? TaskViewController else {return}
         taskVc.dismissTaskViewDelegate = self
+        navigationItem.setHidesBackButton(true, animated: true)
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.3284006715, green: 0.3364258707, blue: 0.3787038028, alpha: 1)
         taskVc.list = list
         if isSegueFromTableView == true {
             taskVc.task = task
@@ -60,8 +63,8 @@ final class ListViewController: UIViewController {
         displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
             guard success == true else {return}
             guard let list = self.list else {return}
-            self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
             self.dataBaseManager?.deleteAllTasks(list: list)
+            self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -157,6 +160,8 @@ extension ListViewController: ListTableViewCellDelegate {
 
 extension ListViewController: DismissTaskViewDelegate {
     func leaveTheView() {
+        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.9664614797, green: 0.7589220405, blue: 0.1949376464, alpha: 1)
+        navigationItem.setHidesBackButton(false, animated: true)
         allTasksTableView.reloadData()
     }
 }

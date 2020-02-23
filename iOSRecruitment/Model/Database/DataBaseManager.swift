@@ -99,9 +99,9 @@ open class DataBaseManager {
     }
     
     func deleteAllLists() {
+        deleteAllTasks()
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
-        deleteAllTasks()
     }
     
     func deleteASpecificList(listName: String) {

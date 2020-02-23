@@ -29,7 +29,7 @@ final class ImportantTasksViewController: UIViewController {
         importantsTasksTableView.register(nibName, forCellReuseIdentifier: Constants.Cell.importantsTasksCellIdentifier)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
-        dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)        
+        dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
     
     override func viewWillAppear(_ animated: Bool) {
