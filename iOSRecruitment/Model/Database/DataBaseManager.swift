@@ -71,7 +71,7 @@ open class DataBaseManager {
     }
     
     // MARK: - Update Entity
-
+    
     func updateTaskStatus(taskName: String, list: List, status: Bool, forKey: String) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -97,7 +97,7 @@ open class DataBaseManager {
         fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
-        
+    
     func deleteAllLists() {
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
@@ -128,7 +128,7 @@ open class DataBaseManager {
     }
     
     // MARK: - Check Entity existence
-
+    
     func checkListExistence(listName: String) -> Bool {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)

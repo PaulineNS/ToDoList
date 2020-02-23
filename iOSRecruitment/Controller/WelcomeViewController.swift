@@ -11,11 +11,11 @@ import UIKit
 final class WelcomeViewController: UIViewController {
     
     // MARK: - Outlets
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     // MARK: - Controller life cycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         animateTheTitle()

@@ -55,6 +55,7 @@ final class ListViewController: UIViewController {
         performSegue(withIdentifier: Constants.Segue.listToTaskSegue, sender: self)
     }
     
+    /// Delete a list from coreData depending his name
     @IBAction private func deleteTheListButtonTapped(_ sender: Any) {
         displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
             guard success == true else {return}
@@ -69,11 +70,14 @@ final class ListViewController: UIViewController {
 // MARK: - TableView DataSource
 
 extension ListViewController: UITableViewDataSource {
+    
+    /// Number of cells in tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).count ?? 0
     }
     
+    /// Define tableView cells
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.listCellIdentifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell()}
         guard let list = list else {return UITableViewCell()}
@@ -84,6 +88,7 @@ extension ListViewController: UITableViewDataSource {
         return cell
     }
     
+    /// Actions after a cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let list = list else {return }
         let taskSelected = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
@@ -96,6 +101,8 @@ extension ListViewController: UITableViewDataSource {
 // MARK: - TableView Delegate
 
 extension ListViewController: UITableViewDelegate {
+    
+    /// Get in shape the tableView footer
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Vous n'avez pas encore de taches"
@@ -105,6 +112,7 @@ extension ListViewController: UITableViewDelegate {
         return label
     }
     
+    /// Display the tableView footer depending the number of elements in favoritesRecipes
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).isEmpty ?? true ? tableView.bounds.size.height : 0

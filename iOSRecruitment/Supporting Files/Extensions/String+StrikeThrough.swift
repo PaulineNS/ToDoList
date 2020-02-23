@@ -6,16 +6,17 @@
 //  Copyright © 2020 cheerz. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 extension String {
+    
+    ///Strike a string
     func strikeThrough(value: Int) -> NSAttributedString {
         let attributeString =  NSMutableAttributedString(string: self)
         attributeString.addAttribute(
             NSAttributedString.Key.strikethroughStyle,
-               value: value,
-                   range:NSMakeRange(0,attributeString.length))
+            value: value,
+            range:NSMakeRange(0,attributeString.length))
         return attributeString
     }
 }

@@ -41,7 +41,7 @@ final class DataBaseManagerTests: XCTestCase {
     
     func testCreateNewTask_WhenAnEntityIsCreated_ThenShouldBeCorrectlySaved() {
         dataBaseManager.createList(name: "Courses")
-        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg")
+        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg", deadLine: "10-05-2020")
         XCTAssertTrue(!dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0]).isEmpty)
         XCTAssertTrue(dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0]).count == 1)
         XCTAssertTrue(dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0])[0].name! == "Acheter pommes")
@@ -55,7 +55,7 @@ final class DataBaseManagerTests: XCTestCase {
     
     func testDeleteAllTasksMethod_WhenEntitiesAreDeleted_ThenShouldBeCorrectlyDeleted() {
         dataBaseManager.createList(name: "Courses")
-        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg")
+        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg", deadLine: "10-05-2020")
         dataBaseManager.deleteAllTasks(list: dataBaseManager.lists[0])
         XCTAssertTrue(dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0]).isEmpty)
     }
@@ -72,8 +72,8 @@ final class DataBaseManagerTests: XCTestCase {
     
     func testDeleteOneTaskMethod_WhenEntityIsDeleted_ThenShouldBeCorrectlyDeleted() {
             dataBaseManager.createList(name: "Courses")
-        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg")
-        dataBaseManager.createTask(name: "Acheter kiwi", list: dataBaseManager.lists[0], note: "quantité : 8")
+        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg", deadLine: "10-05-2020")
+        dataBaseManager.createTask(name: "Acheter kiwi", list: dataBaseManager.lists[0], note: "quantité : 8", deadLine: "10-05-2020")
         dataBaseManager.deleteASpecificTask(taskName: "Acheter pommes", list: dataBaseManager.lists[0])
 
         XCTAssertTrue(!dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0]).isEmpty)
@@ -88,13 +88,13 @@ final class DataBaseManagerTests: XCTestCase {
     
     func testCheckingTaskExistence_WhenFuncIsCalling_ThenShouldReturnTrue() {
         dataBaseManager.createList(name: "Courses")
-        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg")
+        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg", deadLine: "10-05-2020")
         XCTAssertTrue(dataBaseManager.checkTaskExistenceInList(taskName: "Acheter pommes", list: dataBaseManager.lists[0]))
        }
     
     func testUpdateTaskStatus_WhenAnEntityIsUpdated_ThenShouldBeCorrectlySaved() {
         dataBaseManager.createList(name: "Courses")
-        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg")
+        dataBaseManager.createTask(name: "Acheter pommes", list: dataBaseManager.lists[0], note: "1kg", deadLine: "10-05-2020")
         dataBaseManager.updateTaskStatus(taskName: "Acheter pommes", list: dataBaseManager.lists[0], status: true, forKey: "isDone")
         XCTAssertTrue(dataBaseManager.fetchTasksDependingList(list: dataBaseManager.lists[0])[0].isDone == true)
 

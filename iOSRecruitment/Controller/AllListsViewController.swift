@@ -47,6 +47,7 @@ final class AllListsViewController: UIViewController {
     
     // MARK: - Actions
     
+    /// Adding a new list to coreData
     @IBAction private func addListButtonTapped(_ sender: UIButton) {
         displayTextFieldAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
@@ -58,6 +59,7 @@ final class AllListsViewController: UIViewController {
         }
     }
     
+    /// Delete all lists from coredata
     @IBAction private func deleteAllListsButtonTapped(_ sender: UIBarButtonItem) {
         displayMultiChoiceAlert(title: "Voulez-vous vraiment supprimer toutes vos listes ?", message: "") { (success) in
             guard success == true else {return}
@@ -70,10 +72,13 @@ final class AllListsViewController: UIViewController {
 // MARK: - TableView DataSource
 
 extension AllListsViewController: UITableViewDataSource {
+    
+    /// Number of elements in the tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataBaseManager?.lists.count ?? 0
     }
     
+    /// Define tableview cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.allListCellIdentifier, for: indexPath) as? AllListsTableViewCell else { return UITableViewCell() }
         cell.list = dataBaseManager?.lists[indexPath.row]
@@ -81,6 +86,7 @@ extension AllListsViewController: UITableViewDataSource {
         return cell
     }
     
+    /// Action after cell selection
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let listSelected = dataBaseManager?.lists[indexPath.row]
         list = listSelected
@@ -111,6 +117,8 @@ extension AllListsViewController: UITableViewDataSource {
 // MARK: - TableView Delegate
 
 extension AllListsViewController: UITableViewDelegate {
+    
+    /// Get in shape the tableView footer
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Vous n'avez pas encore de listes"
@@ -120,7 +128,19 @@ extension AllListsViewController: UITableViewDelegate {
         return label
     }
     
+    /// Display the tableView footer depending the number of elements in favoritesRecipes
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return dataBaseManager?.lists.isEmpty ?? true ? tableView.bounds.size.height : 0
+    }
+    
+    /// Cell animation
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let translation = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+        cell.layer.transform = translation
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1
+        }
     }
 }

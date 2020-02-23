@@ -50,6 +50,7 @@ final class TaskViewController: UIViewController {
     
     // MARK: - Actions
     
+    /// Action while datePicker value change
     @objc private func dateChanged(datePicker: UIDatePicker) {
         deadLinedate = convertDateToString(date: datePicker.date)
         taskDeadlineTextField.text = deadLinedate
@@ -67,6 +68,7 @@ final class TaskViewController: UIViewController {
         }
     }
     
+    /// Task done status change
     @IBAction private func doneTaskButtonTapped(_ sender: UIButton) {
         guard sender.isSelected else { sender.isSelected = true
             taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 2)
@@ -77,7 +79,7 @@ final class TaskViewController: UIViewController {
         taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 0)
     }
     
-    
+    /// Task important status change
     @IBAction private func importantTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
@@ -88,6 +90,7 @@ final class TaskViewController: UIViewController {
         }
     }
     
+    /// Delete a task from coreData depending his name
     @IBAction private func deleteTaskButtonTapped(_ sender: UIButton) {
         displayMultiChoiceAlert(title: "Voulez-vous supprimer cette tâche ?", message: "") { (success) in
             guard success == true else {return}
@@ -98,6 +101,7 @@ final class TaskViewController: UIViewController {
     
     // MARK: - Methods
     
+    /// Prepare the view according task status : isDone and isImportant
     private func prepareTheView() {
         guard task == nil else {
             manageElementVisibility(isUpdateElementsHidden: true, isDisplayElementsHidden: false, isTxtFieldEnable: false, border: .none)
@@ -120,6 +124,7 @@ final class TaskViewController: UIViewController {
         manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true, border: .roundedRect)
     }
     
+    /// Show or hide some elements of the view
     private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
         importantTaskButton.isHidden = isDisplayElementsHidden
         doneTaskButton.isHidden = isDisplayElementsHidden
@@ -132,6 +137,7 @@ final class TaskViewController: UIViewController {
         taskNameTextField.borderStyle = border
     }
     
+    /// Create the date pickerView
     private func manageDatePicker() {
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
@@ -141,6 +147,7 @@ final class TaskViewController: UIViewController {
         datePicker?.addTarget(self, action: #selector(TaskViewController.dateChanged(datePicker:)), for: .valueChanged)
     }
     
+    /// Add new task to core Data
     private func createTask() -> Bool {
         guard let taskName = taskNameTextField.text, let ownerList = list, let taskNote = taskNoteTextView.text else { return false }
         var noteTask = taskNote.trimmingCharacters(in: .whitespaces)

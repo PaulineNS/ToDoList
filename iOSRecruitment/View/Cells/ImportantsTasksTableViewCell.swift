@@ -70,7 +70,7 @@ final class ImportantsTasksTableViewCell: UITableViewCell {
     }
     
     // MARK: - Methods
-
+    
     func configureButtonImportantTaskCell(indexPath: Int) {
         if dataBaseManager?.fetchImportantsTasks()[indexPath].isDone == true {
             doneTaskButton.isSelected = true

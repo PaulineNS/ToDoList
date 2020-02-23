@@ -10,9 +10,8 @@ import Foundation
 import UIKit
 
 extension UIViewController {
-    /**
-     * Display an alert to enter the list and task name
-     */
+    
+    ///Display an alert to enter the list and task name
     func displayTextFieldAlert(title: String, message: String, placeholder: String ,handlerTaskName: @escaping (String?) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addTextField { textField in
@@ -30,6 +29,7 @@ extension UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    ///Display an alertwith choices
     func displayMultiChoiceAlert(title: String, message: String, completion: @escaping (Bool) -> Void) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "Oui", style: UIAlertAction.Style.default, handler: { (action) in
@@ -43,10 +43,10 @@ extension UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
+    ///Display a unique message alert
     func displayMessageAlert(title: String, message: String){
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
-
 }

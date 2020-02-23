@@ -10,6 +10,7 @@ import UIKit
 
 extension UIViewController {
     
+    /// Change the date format in String
     func convertDateToString(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd-MM-yyy"

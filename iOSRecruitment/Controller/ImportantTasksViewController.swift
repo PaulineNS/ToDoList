@@ -21,6 +21,8 @@ final class ImportantTasksViewController: UIViewController {
     private var task: TaskList?
     
     
+    // MARK: -  Controller life cycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let nibName = UINib(nibName: Constants.Cell.importantsTasksCellNibName, bundle: nil)
@@ -35,6 +37,8 @@ final class ImportantTasksViewController: UIViewController {
         importantsTasksTableView.reloadData()
     }
     
+    // MARK: - Segue
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskVc = segue.destination as? TaskViewController else {return}
         taskVc.dismissTaskViewDelegate = self
@@ -43,8 +47,11 @@ final class ImportantTasksViewController: UIViewController {
     }
 }
 
+// MARK: - TableView Delegate
+
 extension ImportantTasksViewController: UITableViewDelegate {
     
+    /// Get in shape the tableView footer
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Vous n'avez pas de tâches importantes"
@@ -54,17 +61,23 @@ extension ImportantTasksViewController: UITableViewDelegate {
         return label
     }
     
+    /// Display the tableView footer depending the number of elements in favoritesRecipes
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return dataBaseManager?.fetchImportantsTasks().isEmpty ?? true ? tableView.bounds.size.height : 0
     }
     
 }
 
+// MARK: - TableView DataSource
+
 extension ImportantTasksViewController: UITableViewDataSource {
+    
+    /// Number of cells
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataBaseManager?.fetchImportantsTasks().count ?? 0
     }
     
+    /// Cell defintion
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.importantsTasksCellIdentifier, for: indexPath) as? ImportantsTasksTableViewCell else { return UITableViewCell()}
         cell.selectionStyle = .none
@@ -74,6 +87,7 @@ extension ImportantTasksViewController: UITableViewDataSource {
         return cell
     }
     
+    /// Actions after selecting a cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let taskList = dataBaseManager?.fetchImportantsTasks()[indexPath.row].owner else {return }
         let taskSelected = dataBaseManager?.fetchImportantsTasks()[indexPath.row]
