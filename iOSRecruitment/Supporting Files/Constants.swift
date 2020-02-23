@@ -18,6 +18,8 @@ struct Constants {
         static let allListCellIdentifier = "allListsCell"
         static let listCellNibName = "ListTableViewCell"
         static let listCellIdentifier = "ListCell"
+        static let importantsTasksCellNibName = "ImportantsTasksTableViewCell"
+        static let importantsTasksCellIdentifier = "ImportantsTasksCell"
     }
     
     struct Segue {

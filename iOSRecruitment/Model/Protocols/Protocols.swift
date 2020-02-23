@@ -19,3 +19,9 @@ protocol ListTableViewCellDelegate {
     func doneTaskTapped(taskName: String, done: Bool)
     func importantTaskTapped(taskName: String, important: Bool)
 }
+
+protocol ImportantsTasksTableViewCellDelegate {
+    
+    func doneTaskTapped(taskName: String, list :List, done: Bool)
+    func importantTaskTapped(taskName: String, list :List, important: Bool)
+}

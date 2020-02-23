@@ -33,6 +33,8 @@
 		56D97FA023FFF60C00409827 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */; };
 		56EF13DF240268260056DAC3 /* String+StrikeThrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF13DE240268260056DAC3 /* String+StrikeThrough.swift */; };
 		56EF13E124026D580056DAC3 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF13E024026D570056DAC3 /* Protocols.swift */; };
+		56EF13E4240297D10056DAC3 /* ImportantsTasksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF13E2240297D00056DAC3 /* ImportantsTasksTableViewCell.swift */; };
+		56EF13E5240297D10056DAC3 /* ImportantsTasksTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56EF13E3240297D00056DAC3 /* ImportantsTasksTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		56EF13DE240268260056DAC3 /* String+StrikeThrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+StrikeThrough.swift"; sourceTree = "<group>"; };
 		56EF13E024026D570056DAC3 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		56EF13E2240297D00056DAC3 /* ImportantsTasksTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportantsTasksTableViewCell.swift; sourceTree = "<group>"; };
+		56EF13E3240297D00056DAC3 /* ImportantsTasksTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImportantsTasksTableViewCell.xib; sourceTree = "<group>"; };
 		5D1320BCC4C4FF407E770F0E /* Pods_iOSRecruitmentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSRecruitmentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7367C80FC64ADB0D16235D0C /* Pods-iOSRecruitment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSRecruitment.debug.xcconfig"; path = "Target Support Files/Pods-iOSRecruitment/Pods-iOSRecruitment.debug.xcconfig"; sourceTree = "<group>"; };
 		81C27AE877280F673C37B140 /* Pods-iOSRecruitmentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSRecruitmentTests.release.xcconfig"; path = "Target Support Files/Pods-iOSRecruitmentTests/Pods-iOSRecruitmentTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,6 +208,8 @@
 				56D97F9423FFD78800409827 /* AllListsTableViewCell.xib */,
 				56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */,
 				56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */,
+				56EF13E2240297D00056DAC3 /* ImportantsTasksTableViewCell.swift */,
+				56EF13E3240297D00056DAC3 /* ImportantsTasksTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 			files = (
 				09D005802293F1BF00477097 /* LaunchScreen.storyboard in Resources */,
 				56D97F9623FFD78800409827 /* AllListsTableViewCell.xib in Resources */,
+				56EF13E5240297D10056DAC3 /* ImportantsTasksTableViewCell.xib in Resources */,
 				09D0057D2293F1BF00477097 /* Assets.xcassets in Resources */,
 				09D0057B2293F1BB00477097 /* Main.storyboard in Resources */,
 				56D97FA023FFF60C00409827 /* ListTableViewCell.xib in Resources */,
@@ -419,6 +426,7 @@
 				5601CF5D23FFC2230044BE55 /* DataBaseStack.swift in Sources */,
 				56D97F9F23FFF60C00409827 /* ListTableViewCell.swift in Sources */,
 				56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */,
+				56EF13E4240297D10056DAC3 /* ImportantsTasksTableViewCell.swift in Sources */,
 				5601CF5B23FFBC7E0044BE55 /* ImportantTasksViewController.swift in Sources */,
 				09D005762293F1BB00477097 /* AppDelegate.swift in Sources */,
 				56EF13DF240268260056DAC3 /* String+StrikeThrough.swift in Sources */,

@@ -24,10 +24,24 @@ open class DataBaseManager {
         return lists
     }
     
+    func fetchImportantsTasks() -> [TaskList] {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        let predicate = NSPredicate(format: "isImportant == 1")
+        request.predicate = predicate
+        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
+        return tasks
+    }
+    
     var lists: [List] {
         let request: NSFetchRequest<List> = List.fetchRequest()
         guard let lists = try? managedObjectContext.fetch(request) else { return [] }
         return lists
+    }
+    
+    var tasks: [TaskList] {
+        let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
+        guard let tasks = try? managedObjectContext.fetch(request) else { return [] }
+        return tasks
     }
     
     // MARK: - Initializer
@@ -74,14 +88,20 @@ open class DataBaseManager {
     
     // MARK: - Delete Entity
     
+    private func deleteAllTasks() {
+        tasks.forEach { managedObjectContext.delete($0) }
+        dataBaseStack.saveContext()
+    }
+    
     func deleteAllTasks(list: List) {
         fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
-    
+        
     func deleteAllLists() {
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
+        deleteAllTasks()
     }
     
     func deleteASpecificList(listName: String) {

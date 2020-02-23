@@ -95,10 +95,11 @@ extension AllListsViewController: UITableViewDataSource {
     /// Can delete a cell
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteButton = UITableViewRowAction(style: .default, title: "Supprimer") { (action, indexPath) in
-            guard let listName = self.dataBaseManager?.lists[indexPath.row].name else {return}
+            guard let listName = self.dataBaseManager?.lists[indexPath.row].name, let list = self.dataBaseManager?.lists[indexPath.row] else {return}
             self.displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
                 guard success == true else {return}
                 self.dataBaseManager?.deleteASpecificList(listName: listName)
+                self.dataBaseManager?.deleteAllTasks(list: list)
                 self.allListsTableview.reloadData()
             }
         }

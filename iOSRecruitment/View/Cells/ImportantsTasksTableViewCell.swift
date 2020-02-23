@@ -1,30 +1,33 @@
 //
-//  ListTableViewCell.swift
+//  ImportantsTasksTableViewCell.swift
 //  iOSRecruitment
 //
-//  Created by Pauline Nomballais on 21/02/2020.
+//  Created by Pauline Nomballais on 23/02/2020.
 //  Copyright © 2020 cheerz. All rights reserved.
 //
 
 import UIKit
 
-final class ListTableViewCell: UITableViewCell {
+final class ImportantsTasksTableViewCell: UITableViewCell {
     
     // MARK: - Outlets
-    
     @IBOutlet weak var taskNameLabel: UILabel!
+    @IBOutlet weak var listNameLabel: UILabel!
     @IBOutlet weak var doneTaskButton: UIButton!
     @IBOutlet weak var importantTaskButton: UIButton!
     
+    
     // MARK: - Variables
     
-    var delegate: ListTableViewCellDelegate?
+    var delegate: ImportantsTasksTableViewCellDelegate?
     private var dataBaseManager: DataBaseManager?
     private var isTaskDone: Bool?
     private var isTaskImportant: Bool?
     var task: TaskList? {
         didSet {
             taskNameLabel.text = task?.name
+            guard let listName  = task?.owner?.name else {return}
+            listNameLabel.text = " Liste : \(listName)"
         }
     }
     
@@ -49,8 +52,8 @@ final class ListTableViewCell: UITableViewCell {
             taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 2)
             isTaskDone = true
         }
-        guard let taskName = taskNameLabel.text, let taskStatus = isTaskDone else {return}
-        delegate?.doneTaskTapped(taskName: taskName, done: taskStatus)
+        guard let taskName = taskNameLabel.text, let taskStatus = isTaskDone, let list = task?.owner else {return}
+        delegate?.doneTaskTapped(taskName: taskName, list: list, done: taskStatus)
     }
     
     
@@ -62,24 +65,26 @@ final class ListTableViewCell: UITableViewCell {
             sender.isSelected = true
             isTaskImportant = true
         }
-        guard let taskName = taskNameLabel.text, let taskStatus = isTaskImportant else {return}
-        delegate?.importantTaskTapped(taskName: taskName, important: taskStatus)
+        guard let taskName = taskNameLabel.text, let taskStatus = isTaskImportant, let list = task?.owner else {return}
+        delegate?.importantTaskTapped(taskName: taskName, list: list, important: taskStatus)
     }
     
     // MARK: - Methods
-    
-    func configureButtonTaskCell(list: List, indexPath: Int) {
-        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath].isDone == true {
+
+    func configureButtonImportantTaskCell(indexPath: Int) {
+        if dataBaseManager?.fetchImportantsTasks()[indexPath].isDone == true {
             doneTaskButton.isSelected = true
             taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 2)
         } else {
             doneTaskButton.isSelected = false
             taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 0)
         }
-        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath].isImportant == true {
+        if dataBaseManager?.fetchImportantsTasks()[indexPath].isImportant == true {
             importantTaskButton.isSelected = true
         } else {
             importantTaskButton.isSelected = false
         }
     }
 }
+
+

@@ -32,6 +32,11 @@ final class ListViewController: UIViewController {
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        allTasksTableView.reloadData()
+    }
+    
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -53,7 +58,9 @@ final class ListViewController: UIViewController {
     @IBAction private func deleteTheListButtonTapped(_ sender: Any) {
         displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
             guard success == true else {return}
+            guard let list = self.list else {return}
             self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
+            self.dataBaseManager?.deleteAllTasks(list: list)
             self.navigationController?.popViewController(animated: true)
         }
     }
