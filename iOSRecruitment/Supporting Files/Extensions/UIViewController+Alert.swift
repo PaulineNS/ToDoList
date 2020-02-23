@@ -22,7 +22,11 @@ extension UIViewController {
             guard let textField = alertController.textFields else { return }
             handlerTaskName(textField[0].text)
         })
+        let addSecondAction = UIAlertAction(title: "Annuler", style: .cancel) { (action) in
+            alertController.dismiss(animated: true, completion: nil)
+        }
         alertController.addAction(addAction)
+        alertController.addAction(addSecondAction)
         present(alertController, animated: true, completion: nil)
     }
     

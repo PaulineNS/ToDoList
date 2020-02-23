@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol DidAddNewTask {
-    func addTapped()
-}
-
 final class TaskViewController: UIViewController {
     
     // MARK: - Outlets
@@ -26,13 +22,13 @@ final class TaskViewController: UIViewController {
     
     // MARK: - Variables
     
-    var didAddNewTask: DidAddNewTask?
+    var didAddNewTask: DidAddNewTaskDelegate?
     var list: List?
     var task: TaskList?
     private var dataBaseManager: DataBaseManager?
     private var datePicker: UIDatePicker?
-    private let minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
     private var deadLinedate: String?
+    private let minimumDate = Calendar.current.date(byAdding: .day, value: 0, to: Date())
     
     // MARK: - Controller life cycle
     
@@ -74,22 +70,22 @@ final class TaskViewController: UIViewController {
     @IBAction private func doneTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isDone")
-            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: Constants.DataBaseKeys.isDoneKey)
+            taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 0)
         } else {
             sender.isSelected = true
-            taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isDone")
+            taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 2)
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: Constants.DataBaseKeys.isDoneKey)
         }
     }
     
     @IBAction private func importantTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: "isImportant")
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: Constants.DataBaseKeys.isImportantKey)
         } else {
             sender.isSelected = true
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: "isImportant")
+            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: Constants.DataBaseKeys.isImportantKey)
         }
     }
     
@@ -113,10 +109,10 @@ final class TaskViewController: UIViewController {
             taskDeadlineTextField.text = task?.deadline
             if task?.isDone == true {
                 doneTaskButton.isSelected = true
-                taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 2)
+                taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 2)
             } else {
                 doneTaskButton.isSelected = false
-                taskNameTextField.attributedText = defineCrossLineValue(taskName: taskNameTextField.text ?? "", value: 0)
+                taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 0)
             }
             if task?.isImportant == true {
                 importantTaskButton.isSelected = true
@@ -124,13 +120,6 @@ final class TaskViewController: UIViewController {
                 importantTaskButton.isSelected = false
             }
         }
-    }
-    
-    private func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-        attributeString.addAttribute(NSAttributedString.Key
-            .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
-        return attributeString
     }
     
     private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {

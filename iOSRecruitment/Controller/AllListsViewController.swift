@@ -24,8 +24,8 @@ final class AllListsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nibName = UINib(nibName: "AllListsTableViewCell", bundle: nil)
-        allListsTableview.register(nibName, forCellReuseIdentifier: "allListsCell")
+        let nibName = UINib(nibName: Constants.Cell.allListCellNibName, bundle: nil)
+        allListsTableview.register(nibName, forCellReuseIdentifier: Constants.Cell.allListCellIdentifier)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
@@ -39,7 +39,7 @@ final class AllListsViewController: UIViewController {
     // MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard segue.identifier == "AllToList" else {return}
+        guard segue.identifier == Constants.Segue.allToListSegue else {return}
         guard let listVc = segue.destination as? ListViewController else {return}
         listVc.navigationItem.title = list?.name
         listVc.list = list
@@ -50,7 +50,6 @@ final class AllListsViewController: UIViewController {
     @IBAction private func addListButtonTapped(_ sender: UIButton) {
         displayTextFieldAlert(title: "Nouvelle liste", message: "Veuillez lui donner un nom", placeholder: "Liste") { [unowned self] listName in
             guard let listName = listName, !listName.isBlank else { return }
-            
             guard self.dataBaseManager?.checkListExistence(listName: listName) == false else {
                 self.displayMessageAlert(title: "Une liste portant ce nom existe déjà", message: "Veuillez en choisir un autre")
                 return}
@@ -76,19 +75,24 @@ extension AllListsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "allListsCell", for: indexPath) as? AllListsTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.allListCellIdentifier, for: indexPath) as? AllListsTableViewCell else {
             return UITableViewCell()
         }
         cell.list = dataBaseManager?.lists[indexPath.row]
         guard let list = dataBaseManager?.lists[indexPath.row] else {return UITableViewCell()}
-        cell.taskNumberLabel.text = "\(dataBaseManager?.fetchTasksDependingList(list: list).count ?? 0) tâches"
+        guard let numberOfList = dataBaseManager?.fetchTasksDependingList(list: list).count else {return UITableViewCell()}
+        if numberOfList <= 1 {
+            cell.taskNumberLabel.text = "\(numberOfList) tâche"
+        } else {
+            cell.taskNumberLabel.text = "\(numberOfList) tâches"
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let listSelected = dataBaseManager?.lists[indexPath.row]
         list = listSelected
-        self.performSegue(withIdentifier: "AllToList", sender: nil)
+        self.performSegue(withIdentifier: Constants.Segue.allToListSegue, sender: nil)
     }
 }
 

@@ -31,6 +31,8 @@
 		56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9B23FFDC5500409827 /* String+Blank.swift */; };
 		56D97F9F23FFF60C00409827 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */; };
 		56D97FA023FFF60C00409827 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */; };
+		56EF13DF240268260056DAC3 /* String+StrikeThrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF13DE240268260056DAC3 /* String+StrikeThrough.swift */; };
+		56EF13E124026D580056DAC3 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EF13E024026D570056DAC3 /* Protocols.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,8 @@
 		56D97F9B23FFDC5500409827 /* String+Blank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Blank.swift"; sourceTree = "<group>"; };
 		56D97F9D23FFF60C00409827 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		56D97F9E23FFF60C00409827 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
+		56EF13DE240268260056DAC3 /* String+StrikeThrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+StrikeThrough.swift"; sourceTree = "<group>"; };
+		56EF13E024026D570056DAC3 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		5D1320BCC4C4FF407E770F0E /* Pods_iOSRecruitmentTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSRecruitmentTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7367C80FC64ADB0D16235D0C /* Pods-iOSRecruitment.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSRecruitment.debug.xcconfig"; path = "Target Support Files/Pods-iOSRecruitment/Pods-iOSRecruitment.debug.xcconfig"; sourceTree = "<group>"; };
 		81C27AE877280F673C37B140 /* Pods-iOSRecruitmentTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSRecruitmentTests.release.xcconfig"; path = "Target Support Files/Pods-iOSRecruitmentTests/Pods-iOSRecruitmentTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -164,7 +168,7 @@
 		5601CF5023FFB49E0044BE55 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				56EF13DC2401CD7E0056DAC3 /* Protocol */,
+				56EF13DC2401CD7E0056DAC3 /* Protocols */,
 				56EF13DB2401CD640056DAC3 /* Database */,
 			);
 			path = Model;
@@ -210,6 +214,7 @@
 				56D97F9823FFDB9800409827 /* UIViewController+Alert.swift */,
 				56D97F9B23FFDC5500409827 /* String+Blank.swift */,
 				565AF80D2401678A00B93C77 /* UIViewController+Date.swift */,
+				56EF13DE240268260056DAC3 /* String+StrikeThrough.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -224,11 +229,12 @@
 			path = Database;
 			sourceTree = "<group>";
 		};
-		56EF13DC2401CD7E0056DAC3 /* Protocol */ = {
+		56EF13DC2401CD7E0056DAC3 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				56EF13E024026D570056DAC3 /* Protocols.swift */,
 			);
-			path = Protocol;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		57A30E33A4FBEE1B217944C5 /* Frameworks */ = {
@@ -415,6 +421,7 @@
 				56D97F9C23FFDC5500409827 /* String+Blank.swift in Sources */,
 				5601CF5B23FFBC7E0044BE55 /* ImportantTasksViewController.swift in Sources */,
 				09D005762293F1BB00477097 /* AppDelegate.swift in Sources */,
+				56EF13DF240268260056DAC3 /* String+StrikeThrough.swift in Sources */,
 				5601CF5523FFBC4A0044BE55 /* AllListsViewController.swift in Sources */,
 				56D97F9523FFD78800409827 /* AllListsTableViewCell.swift in Sources */,
 				5601CF5923FFBC6C0044BE55 /* TaskViewController.swift in Sources */,
@@ -424,6 +431,7 @@
 				5601CF5F23FFC25C0044BE55 /* DataBaseManager.swift in Sources */,
 				56D97F9123FFCD4900409827 /* Constants.swift in Sources */,
 				56D97F9923FFDB9800409827 /* UIViewController+Alert.swift in Sources */,
+				56EF13E124026D580056DAC3 /* Protocols.swift in Sources */,
 				565AF80E2401678B00B93C77 /* UIViewController+Date.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

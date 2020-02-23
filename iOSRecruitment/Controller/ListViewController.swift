@@ -25,8 +25,8 @@ final class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nibName = UINib(nibName: "ListTableViewCell", bundle: nil)
-        allTasksTableView.register(nibName, forCellReuseIdentifier: "ListCell")
+        let nibName = UINib(nibName: Constants.Cell.listCellNibName, bundle: nil)
+        allTasksTableView.register(nibName, forCellReuseIdentifier: Constants.Cell.listCellIdentifier)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         let coreDataStack = appDelegate.dataBaseStack
         dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
@@ -47,7 +47,7 @@ final class ListViewController: UIViewController {
     
     @IBAction private func addTaskButtonTapped(_ sender: UIButton) {
         isSegueFromTableView = false
-        performSegue(withIdentifier: "ListToTask", sender: self)
+        performSegue(withIdentifier: Constants.Segue.listToTaskSegue, sender: self)
     }
     
     @IBAction private func deleteTheListButtonTapped(_ sender: Any) {
@@ -56,15 +56,6 @@ final class ListViewController: UIViewController {
             self.dataBaseManager?.deleteASpecificList(listName: self.list?.name ?? "")
             self.navigationController?.popViewController(animated: true)
         }
-    }
-    
-    // MARK: - Methods
-    
-    private func defineCrossLineValue(taskName: String, value: Int) -> NSMutableAttributedString {
-        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string: taskName)
-        attributeString.addAttribute(NSAttributedString.Key
-            .strikethroughStyle, value: value, range: NSMakeRange(0, attributeString.length))
-        return attributeString
     }
 }
 
@@ -83,10 +74,10 @@ extension ListViewController: UITableViewDataSource {
         guard let list = list else {return UITableViewCell()}
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
             cell.doneTaskButton.isSelected = true
-            cell.taskNameLabel.attributedText = defineCrossLineValue(taskName: cell.taskNameLabel.text ?? "", value: 2)
+            cell.taskNameLabel.attributedText = cell.taskNameLabel.text?.strikeThrough(value: 2)
         } else {
             cell.doneTaskButton.isSelected = false
-            cell.taskNameLabel.attributedText = defineCrossLineValue(taskName: cell.taskNameLabel.text ?? "", value: 0)  
+            cell.taskNameLabel.attributedText =  cell.taskNameLabel.text?.strikeThrough(value: 0)
         }
         if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isImportant == true {
             cell.importantTaskButton.isSelected = true
@@ -103,7 +94,7 @@ extension ListViewController: UITableViewDataSource {
         let taskSelected = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
         task = taskSelected
         isSegueFromTableView = true
-        self.performSegue(withIdentifier: "ListToTask", sender: nil)
+        self.performSegue(withIdentifier: Constants.Segue.listToTaskSegue, sender: nil)
     }
 }
 
@@ -127,7 +118,7 @@ extension ListViewController: UITableViewDelegate {
 
 // MARK: - DidAddNewTaskDelegate
 
-extension ListViewController: DidAddNewTask {
+extension ListViewController: DidAddNewTaskDelegate {
     func addTapped() {
         allTasksTableView.reloadData()
     }
@@ -138,11 +129,11 @@ extension ListViewController: DidAddNewTask {
 extension ListViewController: ListTableViewCellDelegate {
     func doneTaskTapped(taskName: String, done: Bool) {
         guard let list = list else { return }
-        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: done, forKey: "isDone")
+        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: done, forKey: Constants.DataBaseKeys.isDoneKey)
     }
     
     func importantTaskTapped(taskName: String, important: Bool) {
         guard let list = list else { return }
-        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: "isImportant")
+        dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: Constants.DataBaseKeys.isImportantKey)
     }
 }
