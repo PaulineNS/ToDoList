@@ -75,17 +75,9 @@ extension AllListsViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.allListCellIdentifier, for: indexPath) as? AllListsTableViewCell else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.allListCellIdentifier, for: indexPath) as? AllListsTableViewCell else { return UITableViewCell() }
         cell.list = dataBaseManager?.lists[indexPath.row]
-        guard let list = dataBaseManager?.lists[indexPath.row] else {return UITableViewCell()}
-        guard let numberOfList = dataBaseManager?.fetchTasksDependingList(list: list).count else {return UITableViewCell()}
-        if numberOfList <= 1 {
-            cell.taskNumberLabel.text = "\(numberOfList) tâche"
-        } else {
-            cell.taskNumberLabel.text = "\(numberOfList) tâches"
-        }
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -93,6 +85,25 @@ extension AllListsViewController: UITableViewDataSource {
         let listSelected = dataBaseManager?.lists[indexPath.row]
         list = listSelected
         self.performSegue(withIdentifier: Constants.Segue.allToListSegue, sender: nil)
+    }
+    
+    /// Can Edit the tableView
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    /// Can delete a cell
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Supprimer") { (action, indexPath) in
+            guard let listName = self.dataBaseManager?.lists[indexPath.row].name else {return}
+            self.displayMultiChoiceAlert(title: "Vous êtes sur le point de supprimer cette liste", message: "") { (success) in
+                guard success == true else {return}
+                self.dataBaseManager?.deleteASpecificList(listName: listName)
+                self.allListsTableview.reloadData()
+            }
+        }
+        deleteButton.backgroundColor = #colorLiteral(red: 0.3228748441, green: 0.7752146125, blue: 0.8510860205, alpha: 1)
+        return [deleteButton]
     }
 }
 

@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Constants file
+
 struct Constants {
     static let appName = "To Do List"
     

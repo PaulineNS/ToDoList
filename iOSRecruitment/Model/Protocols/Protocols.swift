@@ -8,6 +8,8 @@
 
 import Foundation
 
+// MARK: - Protocols
+
 protocol DidAddNewTaskDelegate {
     func addTapped()
 }

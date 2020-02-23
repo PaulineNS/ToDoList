@@ -68,24 +68,12 @@ extension ListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ListCell", for: indexPath) as? ListTableViewCell else {
-            return UITableViewCell()
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.Cell.listCellIdentifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell()}
         guard let list = list else {return UITableViewCell()}
-        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isDone == true {
-            cell.doneTaskButton.isSelected = true
-            cell.taskNameLabel.attributedText = cell.taskNameLabel.text?.strikeThrough(value: 2)
-        } else {
-            cell.doneTaskButton.isSelected = false
-            cell.taskNameLabel.attributedText =  cell.taskNameLabel.text?.strikeThrough(value: 0)
-        }
-        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].isImportant == true {
-            cell.importantTaskButton.isSelected = true
-        } else {
-            cell.importantTaskButton.isSelected = false
-        }
-        cell.task = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
+        cell.selectionStyle = .none
         cell.delegate = self
+        cell.configureButtonTaskCell(list: list, indexPath: indexPath.row)
+        cell.task = dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row]
         return cell
     }
     
@@ -114,13 +102,25 @@ extension ListViewController: UITableViewDelegate {
         guard let list = list else {return 0}
         return dataBaseManager?.fetchTasksDependingList(list: list).isEmpty ?? true ? tableView.bounds.size.height : 0
     }
-}
-
-// MARK: - DidAddNewTaskDelegate
-
-extension ListViewController: DidAddNewTaskDelegate {
-    func addTapped() {
-        allTasksTableView.reloadData()
+    
+    /// Can Edit the tableView
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    /// Can delete a cell
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .default, title: "Supprimer") { (action, indexPath) in
+            guard let list = self.list else {return}
+            guard let taskName = self.dataBaseManager?.fetchTasksDependingList(list: list)[indexPath.row].name else {return}
+            self.displayMultiChoiceAlert(title: "Voulez-vous supprimer cette tâche ?", message: "") { (success) in
+            guard success == true else {return}
+            self.dataBaseManager?.deleteASpecificTask(taskName: taskName, list: list)
+            self.allTasksTableView.reloadData()
+            }
+        }
+        deleteButton.backgroundColor = #colorLiteral(red: 0.3228748441, green: 0.7752146125, blue: 0.8510860205, alpha: 1)
+        return [deleteButton]
     }
 }
 
@@ -137,3 +137,12 @@ extension ListViewController: ListTableViewCellDelegate {
         dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: Constants.DataBaseKeys.isImportantKey)
     }
 }
+
+// MARK: - DidAddNewTaskDelegate
+
+extension ListViewController: DidAddNewTaskDelegate {
+    func addTapped() {
+        allTasksTableView.reloadData()
+    }
+}
+

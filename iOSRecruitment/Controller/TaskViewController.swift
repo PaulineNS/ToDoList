@@ -68,16 +68,15 @@ final class TaskViewController: UIViewController {
     }
     
     @IBAction private func doneTaskButtonTapped(_ sender: UIButton) {
-        if sender.isSelected {
-            sender.isSelected = false
-            dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: Constants.DataBaseKeys.isDoneKey)
-            taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 0)
-        } else {
-            sender.isSelected = true
+        guard sender.isSelected else { sender.isSelected = true
             taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 2)
             dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: true, forKey: Constants.DataBaseKeys.isDoneKey)
-        }
+            return }
+        sender.isSelected = false
+        dataBaseManager?.updateTaskStatus(taskName: taskNameTextField.text ?? "", list: list ?? List(), status: false, forKey: Constants.DataBaseKeys.isDoneKey)
+        taskNameTextField.attributedText = taskNameTextField.text?.strikeThrough(value: 0)
     }
+    
     
     @IBAction private func importantTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
@@ -100,9 +99,7 @@ final class TaskViewController: UIViewController {
     // MARK: - Methods
     
     private func prepareTheView() {
-        if task == nil {
-            manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true, border: .roundedRect)
-        } else {
+        guard task == nil else {
             manageElementVisibility(isUpdateElementsHidden: true, isDisplayElementsHidden: false, isTxtFieldEnable: false, border: .none)
             taskNoteTextView.text = task?.note
             taskNameTextField.text = task?.name
@@ -119,7 +116,8 @@ final class TaskViewController: UIViewController {
             } else {
                 importantTaskButton.isSelected = false
             }
-        }
+            return }
+        manageElementVisibility(isUpdateElementsHidden: false, isDisplayElementsHidden: true, isTxtFieldEnable: true, border: .roundedRect)
     }
     
     private func manageElementVisibility(isUpdateElementsHidden: Bool, isDisplayElementsHidden: Bool, isTxtFieldEnable: Bool, border: UITextField.BorderStyle) {
@@ -153,13 +151,10 @@ final class TaskViewController: UIViewController {
         if dateTask == nil {
             dateTask = "Pas d'échéance"
         }
-        if dataBaseManager?.checkTaskExistenceInList(taskName: taskName, list: list ?? List()) == false {
-            self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask, deadLine: dateTask ?? "hello")
-            return true
-        } else {
-            self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
-            return false
-        }
+        guard dataBaseManager?.checkTaskExistenceInList(taskName: taskName, list: list ?? List()) == false else { self.displayMessageAlert(title: "Une tâche portant ce nom existe déjà dans la liste", message: "Veuillez en choisir un autre")
+            return false}
+        self.dataBaseManager?.createTask(name: taskName, list: ownerList, note: noteTask, deadLine: dateTask ?? "")
+        return true
     }
     
     private func dismissTheView() {

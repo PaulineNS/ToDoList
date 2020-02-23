@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class DataBaseManager {
+open class DataBaseManager {
     
     // MARK: - Variables
     

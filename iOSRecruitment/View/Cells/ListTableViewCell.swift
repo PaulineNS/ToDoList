@@ -8,27 +8,42 @@
 
 import UIKit
 
-class ListTableViewCell: UITableViewCell {
+final class ListTableViewCell: UITableViewCell {
+    
+    // MARK: - Outlets
 
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var doneTaskButton: UIButton!
     @IBOutlet weak var importantTaskButton: UIButton!
     
+    // MARK: - Variables
+
     var delegate: ListTableViewCellDelegate?
-    var isTaskDone: Bool?
-    var isTaskImportant: Bool?
-    
+    private var dataBaseManager: DataBaseManager?
+    private var isTaskDone: Bool?
+    private var isTaskImportant: Bool?
     var task: TaskList? {
         didSet {
             taskNameLabel.text = task?.name
         }
     }
     
+    // MARK: - Awake from Nib
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
+        let coreDataStack = appDelegate.dataBaseStack
+        dataBaseManager = DataBaseManager(dataBaseStack: coreDataStack)
+    }
+    
+    // MARK: - Actions
+
     @IBAction func doneTaskButtonTapped(_ sender: UIButton) {
         if sender.isSelected {
             sender.isSelected = false
-            isTaskDone = false
             taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 0)
+            isTaskDone = false
         } else {
             sender.isSelected = true
             taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 2)
@@ -49,5 +64,22 @@ class ListTableViewCell: UITableViewCell {
         }
         guard let taskName = taskNameLabel.text, let taskStatus = isTaskImportant else {return}
         delegate?.importantTaskTapped(taskName: taskName, important: taskStatus)
+    }
+    
+    // MARK: - Methods
+
+    func configureButtonTaskCell(list: List, indexPath: Int) {
+        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath].isDone == true {
+            doneTaskButton.isSelected = true
+            taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 2)
+        } else {
+            doneTaskButton.isSelected = false
+            taskNameLabel.attributedText = taskNameLabel.text?.strikeThrough(value: 0)
+        }
+        if dataBaseManager?.fetchTasksDependingList(list: list)[indexPath].isImportant == true {
+            importantTaskButton.isSelected = true
+        } else {
+            importantTaskButton.isSelected = false
+        }
     }
 }
