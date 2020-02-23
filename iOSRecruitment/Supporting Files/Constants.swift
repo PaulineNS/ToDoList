@@ -26,6 +26,7 @@ struct Constants {
         static let welcomeSegue = "WelcomeToApp"
         static let allToListSegue = "AllToList"
         static let listToTaskSegue = "ListToTask"
+        static let importantToTaskSSegue = "ImportantToTask"
     }
     
     struct DataBaseKeys {

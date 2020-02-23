@@ -9,15 +9,17 @@
 import UIKit
 
 final class ImportantTasksViewController: UIViewController {
-
+    
     // MARK: - Outlets
-
+    
     @IBOutlet weak var importantsTasksTableView: UITableView! { didSet { importantsTasksTableView.tableFooterView = UIView() }}
     
     // MARK: - Variables
-
+    
     private var dataBaseManager: DataBaseManager?
-
+    private var list: List?
+    private var task: TaskList?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +33,13 @@ final class ImportantTasksViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         importantsTasksTableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let taskVc = segue.destination as? TaskViewController else {return}
+        taskVc.dismissTaskViewDelegate = self
+        taskVc.task = task
+        taskVc.list = list
     }
 }
 
@@ -64,6 +73,14 @@ extension ImportantTasksViewController: UITableViewDataSource {
         cell.task = dataBaseManager?.fetchImportantsTasks()[indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let taskList = dataBaseManager?.fetchImportantsTasks()[indexPath.row].owner else {return }
+        let taskSelected = dataBaseManager?.fetchImportantsTasks()[indexPath.row]
+        task = taskSelected
+        list = taskList
+        self.performSegue(withIdentifier: Constants.Segue.importantToTaskSSegue, sender: nil)
+    }
 }
 
 // MARK: - ImportantsTasksTableViewCellDelegate
@@ -75,6 +92,14 @@ extension ImportantTasksViewController: ImportantsTasksTableViewCellDelegate {
     
     func importantTaskTapped(taskName: String, list: List, important: Bool) {
         dataBaseManager?.updateTaskStatus(taskName: taskName, list: list, status: important, forKey: Constants.DataBaseKeys.isImportantKey)
+        importantsTasksTableView.reloadData()
+    }
+}
+
+// MARK: - DismissTaskViewDelegate
+
+extension ImportantTasksViewController: DismissTaskViewDelegate {
+    func leaveTheView() {
         importantsTasksTableView.reloadData()
     }
 }

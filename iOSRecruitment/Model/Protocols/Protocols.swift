@@ -10,8 +10,8 @@ import Foundation
 
 // MARK: - Protocols
 
-protocol DidAddNewTaskDelegate {
-    func addTapped()
+protocol DismissTaskViewDelegate {
+    func leaveTheView()
 }
 
 protocol ListTableViewCellDelegate {

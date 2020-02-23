@@ -215,10 +215,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5k-Zl-TLT">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-Nu-o0v">
                                 <rect key="frame" x="0.0" y="342" width="414" height="500"/>
                                 <subviews>
@@ -230,7 +226,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="LPa-yN-TKY"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                        <state key="normal" title="← Ma liste">
+                                        <state key="normal" title="← Retour">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
@@ -361,11 +357,7 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" id="9J7-RM-peu"/>
                             <constraint firstAttribute="bottom" secondItem="cbf-Nu-o0v" secondAttribute="bottom" id="HeA-3E-KSo"/>
-                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="top" secondItem="qwh-Cj-sbg" secondAttribute="top" id="PnU-am-d4t"/>
-                            <constraint firstAttribute="bottom" secondItem="q5k-Zl-TLT" secondAttribute="bottom" id="VRL-wZ-8Az"/>
-                            <constraint firstItem="q5k-Zl-TLT" firstAttribute="trailing" secondItem="dcH-xN-bj0" secondAttribute="trailing" id="Xhe-xu-nVS"/>
                             <constraint firstItem="cbf-Nu-o0v" firstAttribute="leading" secondItem="dcH-xN-bj0" secondAttribute="leading" id="fxA-EH-Ajf"/>
                             <constraint firstItem="cbf-Nu-o0v" firstAttribute="trailing" secondItem="dcH-xN-bj0" secondAttribute="trailing" id="oBp-cd-z15"/>
                         </constraints>
@@ -437,11 +429,12 @@
                     <navigationItem key="navigationItem" title="Tâches importantes" id="OIy-Qg-dos"/>
                     <connections>
                         <outlet property="importantsTasksTableView" destination="3xs-8Q-BT3" id="zx2-Rv-drC"/>
+                        <segue destination="BWw-52-nHq" kind="presentation" identifier="ImportantToTask" id="CD3-rl-AmN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpb-nC-5c4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4513.04347826087" y="444.64285714285711"/>
+            <point key="canvasLocation" x="4574" y="515"/>
         </scene>
         <!--Importantes-->
         <scene sceneID="BN3-bQ-qTH">
@@ -450,7 +443,7 @@
                     <tabBarItem key="tabBarItem" title="Importantes" image="yellowFlag" id="aJ9-oA-i9A"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="4eh-K3-4GC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
@@ -467,7 +460,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r9Z-oW-iyw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3602.898550724638" y="444.64285714285711"/>
+            <point key="canvasLocation" x="3603" y="515"/>
         </scene>
     </scenes>
     <resources>
@@ -479,4 +472,7 @@
         <image name="yellowFlag" width="25" height="25"/>
         <image name="yellowTrash" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="CD3-rl-AmN"/>
+    </inferredMetricsTieBreakers>
 </document>

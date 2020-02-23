@@ -41,7 +41,7 @@ final class ListViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let taskVc = segue.destination as? TaskViewController else {return}
-        taskVc.didAddNewTask = self
+        taskVc.dismissTaskViewDelegate = self
         taskVc.list = list
         if isSegueFromTableView == true {
             taskVc.task = task
@@ -145,10 +145,10 @@ extension ListViewController: ListTableViewCellDelegate {
     }
 }
 
-// MARK: - DidAddNewTaskDelegate
+// MARK: - DismissTaskViewDelegate
 
-extension ListViewController: DidAddNewTaskDelegate {
-    func addTapped() {
+extension ListViewController: DismissTaskViewDelegate {
+    func leaveTheView() {
         allTasksTableView.reloadData()
     }
 }

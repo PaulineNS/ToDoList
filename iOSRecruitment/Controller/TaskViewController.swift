@@ -22,7 +22,7 @@ final class TaskViewController: UIViewController {
     
     // MARK: - Variables
     
-    var didAddNewTask: DidAddNewTaskDelegate?
+    var dismissTaskViewDelegate: DismissTaskViewDelegate?
     var list: List?
     var task: TaskList?
     private var dataBaseManager: DataBaseManager?
@@ -158,7 +158,7 @@ final class TaskViewController: UIViewController {
     }
     
     private func dismissTheView() {
-        didAddNewTask?.addTapped()
+        dismissTaskViewDelegate?.leaveTheView()
         self.dismiss(animated: true, completion: nil)
     }
 }
