@@ -53,12 +53,14 @@ open class DataBaseManager {
     
     // MARK: - Create Entity
     
+    ///Create a list entity
     func createList(name: String) {
         let list = List(context: managedObjectContext)
         list.name = name
         dataBaseStack.saveContext()
     }
     
+    ///Create a task entity
     func createTask(name: String, list: List, note: String, deadLine: String) {
         let task = TaskList(context: managedObjectContext)
         task.isDone = false
@@ -72,6 +74,7 @@ open class DataBaseManager {
     
     // MARK: - Update Entity
     
+    /// Update isDone and isImportant status
     func updateTaskStatus(taskName: String, list: List, status: Bool, forKey: String) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -88,22 +91,26 @@ open class DataBaseManager {
     
     // MARK: - Delete Entity
     
+    ///Delete all tasks entitites
     private func deleteAllTasks() {
         tasks.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
+    /// Delete all tasks in a specific list
     func deleteAllTasks(list: List) {
         fetchTasksDependingList(list: list).forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
+    /// Delete all lists and tasks
     func deleteAllLists() {
         deleteAllTasks()
         lists.forEach { managedObjectContext.delete($0) }
         dataBaseStack.saveContext()
     }
     
+    ///Delete a specific list according his name
     func deleteASpecificList(listName: String) {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -115,6 +122,7 @@ open class DataBaseManager {
         dataBaseStack.saveContext()
     }
     
+    /// Delete a specific task according his name and list owner
     func deleteASpecificTask(taskName: String, list: List) {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)
@@ -129,6 +137,7 @@ open class DataBaseManager {
     
     // MARK: - Check Entity existence
     
+    /// check if a list exist in the dataBase thanks to his name
     func checkListExistence(listName: String) -> Bool {
         let request: NSFetchRequest<List> = List.fetchRequest()
         let predicateListName = NSPredicate(format: "name == %@", listName)
@@ -139,6 +148,7 @@ open class DataBaseManager {
         return true
     }
     
+    /// check if a task exist in the dataBase thanks to his name and list owner
     func checkTaskExistenceInList(taskName: String, list: List) -> Bool {
         let request: NSFetchRequest<TaskList> = TaskList.fetchRequest()
         let predicateOwner = NSPredicate(format: "owner == %@", list)

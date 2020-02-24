@@ -55,7 +55,6 @@
                 <navigationController id="dvc-Px-S7S" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Listes" image="list" id="r6X-eh-GNo"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="hdJ-HA-t1I">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.32926684620000002" green="0.33952775600000001" blue="0.37492364649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -213,7 +212,7 @@
             <objects>
                 <viewController id="BWw-52-nHq" customClass="TaskViewController" customModule="iOSRecruitment" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qwh-Cj-sbg">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbf-Nu-o0v">
@@ -246,7 +245,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="QZZ-x2-PWz">
-                                                        <rect key="frame" x="20" y="29.5" width="260" height="241"/>
+                                                        <rect key="frame" x="20" y="17" width="260" height="266"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9kt-ZZ-VhQ">
                                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="40"/>
@@ -301,7 +300,7 @@
                                                                 </connections>
                                                             </textView>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5P-2r-F2N">
-                                                                <rect key="frame" x="0.0" y="216" width="260" height="25"/>
+                                                                <rect key="frame" x="0.0" y="216" width="260" height="50"/>
                                                                 <state key="normal" image="yellowTrash"/>
                                                                 <connections>
                                                                     <action selector="deleteTaskButtonTapped:" destination="BWw-52-nHq" eventType="touchUpInside" id="IKh-AZ-WcK"/>
@@ -447,7 +446,6 @@
                     <tabBarItem key="tabBarItem" title="Importantes" image="yellowFlag" id="aJ9-oA-i9A"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="4eh-K3-4GC">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
