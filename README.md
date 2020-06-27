@@ -1,32 +1,13 @@
-L’objectif est de réaliser une app de todo list à partir du code présent dans ce repository, que vous devrez fork afin de nous envoyer votre travail
+# ToDoList
 
-_Ce que vous devez faire :_
+The application ToDoList allows you to create lists and associated tasks. It is also possible to add a description and deadline when creating a task. Each task can be "important". Once the task is completed the user can strike it out or delete it.
 
+I used Core Data to store lists locally.
 
+### Lists : 
 
-1. L’interface utilisateur devra proposer une liste de tâches avec la possibilité de définir une tâche comme effectuée/non effectuée. (composant au choix : bouton custom, switch control … à votre convenance !)
-2. Sur le tap d’une tâche, l’utilisateur pourra accéder au détail d’une tâche, et cet écran proposera un bouton back leramenant sur la liste précédemment consultée. ­ 
-3. Si l’utilisateur kill l’app, il doit pouvoir retrouver l’état de sa liste telle qu’ affichée lors de la précédente utilisation.
-4. Bonus : pouvoir supprimer une tâche 
+![Capture d’écran 2020-06-27 à 12 07 07](https://user-images.githubusercontent.com/45040366/85919774-bf159f00-b86e-11ea-8297-44ec8df611a4.png)
 
-Pour réaliser ce test, vous devez choisir une architecture parmi les plus utilisées (MVC, MVVM, VIPER, MVP, etc ..) et produire un code qui en respecte les guidelines. Quelle que soit l’architecture retenue, les principes SOLID doivent être respectés. 
+### Tasks : 
 
-Le code fourni est _incomplet_ et ​_imparfait_​. Votre objectif est donc de partir de ce projet et de le continuer. Vous êtes ​encouragés​ à modifier / refactorer le code déjà existant. 
-
-Vous pouvez utiliser toutes les librairies de votre choix, ou au contraire ne vous appuyer que sur les frameworks Apple. 
-
-Ce que nous observerons dans l’exercice : 
-
-
-
-*   La qualité du code ­
-*   Sa simplicité
-*   L’architecture ­ 
-*   Les optimisations diverses 
-*   La créativité du candidat ­
-
-Imaginez votre code comme étant la base d’une application étant amenée à évoluer (nouveaux écrans, nouvelles fonctionnalités...)
-
-Bon courage et démarquez­ vous des autres candidats !! ;-)
-
-Nous sommes à votre disposition. Si vous avez des questions, surtout n’hésitez pas. 
+![Capture d’écran 2020-06-27 à 12 09 35](https://user-images.githubusercontent.com/45040366/85919828-174ca100-b86f-11ea-8c36-9dc3337e484d.png)
